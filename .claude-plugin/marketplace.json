@@ -1,0 +1,21 @@
+{
+  "name": "typmem",
+  "owner": {
+    "name": "thaitype",
+    "url": "https://github.com/thaitype/typmem"
+  },
+  "metadata": {
+    "pluginRoot": "./"
+  },
+  "plugins": [
+    {
+      "name": "typmem-skills",
+      "source": "./",
+      "skills": [
+        "./skills/typmem-judge",
+        "./skills/typmem-learn",
+        "./skills/typmem-retro"
+      ]
+    }
+  ]
+}
