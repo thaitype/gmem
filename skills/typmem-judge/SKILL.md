@@ -1,6 +1,7 @@
 ---
 name: typmem-judge
-description: Review captured learnings (acting as an LLM-as-judge) in ~/.typmem/memory/learnings/ and decide automatically what to do with each — revise it in place when the fix is cheap and safe, or raise a proposal in ~/.typmem/memory/proposals/ when it should be promoted, conflicts with a higher layer, or is unclear. Use this when asked to "judge", "review the learnings", "vet the inbox", "triage learnings", "clean up captured facts", or after a batch of typmem-learn captures has piled up. This never blocks: learnings are valid and usable whether or not a human ever acts on a proposal. Do NOT use it to write precedents or rules directly (those come from a human acting on a proposal), and do NOT use it on retros (retros are diaries and are never reviewed).
+description: >-
+   Review captured learnings (acting as an LLM-as-judge) in ~/.typmem/memory/learnings/ and decide automatically what to do with each — revise it in place when the fix is cheap and safe, or raise a proposal in ~/.typmem/memory/proposals/ when it should be promoted, conflicts with a higher layer, or is unclear. Use this when asked to "judge", "review the learnings", "vet the inbox", "triage learnings", "clean up captured facts", or after a batch of typmem-learn captures has piled up. This never blocks: learnings are valid and usable whether or not a human ever acts on a proposal. Do NOT use it to write precedents or rules directly (those come from a human acting on a proposal), and do NOT use it on retros (retros are diaries and are never reviewed).
 ---
 
 # typmem-judge
