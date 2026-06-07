@@ -1,5 +1,11 @@
 # typmem
 
+install skills
+
+```
+npx skills@latest add thaitype/typmem
+```
+
 ## Place this in CLAUDE.md
 
 ```md
