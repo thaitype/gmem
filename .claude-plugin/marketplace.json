@@ -16,6 +16,11 @@
       "name": "gmem-tools",
       "description": "Maintenance tools for gmem: migrate older gmem and crew-style memory to the current layout.",
       "source": "./plugins/gmem-tools"
+    },
+    {
+      "name": "gmem-extensions",
+      "description": "Optional extensions for gmem: set up typdoc so gmem-check checks memory frontmatter against schemas.",
+      "source": "./plugins/gmem-extensions"
     }
   ]
 }

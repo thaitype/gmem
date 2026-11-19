@@ -133,6 +133,18 @@ config     -> /path/to/project/.gmem/gmem-config.toml
 
 Create the folders only when something is first saved into them, not during setup.
 
+Then ask one more question:
+
+3. **Add typdoc to help check memory format?** Say first that gmem does not need
+   typdoc: `gmem-check` already checks format on its own. typdoc is an optional helper
+   that checks each file's frontmatter against a schema and reports broken links, and
+   `gmem-check` uses it when it is set up.
+   - **No (default)** — skip it. The user can run `gmem-typdoc` any time later.
+   - **Yes** — run `gmem-typdoc`, which ships with the `gmem-extensions` plugin. If that
+     skill is not available, show how to get it
+     (`/plugin install gmem-extensions@gmem`, or `npx skills@latest add thaitype/gmem`) and
+     stop there. `gmem-typdoc` asks before it installs typdoc itself.
+
 ## Dependencies
 
 `gmem-tidy` decides its fixes with the user through two skills from

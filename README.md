@@ -76,7 +76,7 @@ assumes you installed the Claude Code plugin.
    /gmem-setup
    ```
 
-   The agent asks two questions, one at a time. For where the config lives, choose
+   The agent asks three questions, one at a time. For where the config lives, choose
    **Project level** (the other option is **User level**, shared by every project), and **Recommended** for where each kind of memory lives. When it
    finishes, it prints the folders it resolved:
 
@@ -94,6 +94,10 @@ assumes you installed the Claude Code plugin.
    With **Recommended**, this project's context and status stay in the project. What
    the agent learns and what you decide live in your home directory, so they carry
    across projects.
+
+   Then it asks whether to add typdoc, an optional helper for checking memory format.
+   gmem works without it, so keep the default, **No**. You can set it up later with
+   `gmem-typdoc`.
 
    It also checks for `grilling`, `wayfinder`, and `research`, three skills from
    [mattpocock/skills](https://github.com/mattpocock/skills), and offers to install
@@ -258,6 +262,22 @@ a decision the agent should follow unless it states a reason not to. Most learni
 stay learnings, and that is fine.
 
 ### Prune: tidy against the real code
+
+Run `gmem-check` often, for example before you commit memory. It changes nothing. It
+reports files in the wrong place, file names that break the pattern, index rows that
+are missing or point at nothing, and frontmatter that is missing a required field. Each
+finding names the skill that fixes it.
+
+`gmem-check` checks format itself. If you want frontmatter checked against schemas,
+install [typdoc](https://github.com/thaitype/typdoc) and the `gmem-extensions` plugin,
+then run `gmem-typdoc`:
+
+```
+/plugin install gmem-extensions@gmem
+/gmem-typdoc
+```
+
+`gmem-check` then uses `typdoc validate` for each `.gmem/` folder.
 
 Run `gmem-tidy` now and then, and always when the agent starts acting on facts that
 are no longer true. It reads every file in the scope you choose and checks each one against

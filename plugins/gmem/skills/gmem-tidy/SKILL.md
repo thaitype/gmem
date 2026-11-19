@@ -20,7 +20,8 @@ from the user.
 
 ## 2. Scan before asking anything else
 
-Read every file in scope in full. Check each one against the rules below, and **check facts against the real world**
+Start with `gmem-check` for the mechanical findings (layout, names, indexes, format),
+then read every file in scope in full. Check each one against the rules below, and **check facts against the real world**
 (the script, the code in the repository, the file a read-point names), not just against other memory. A memory line
 that contradicts the code is the most expensive kind, because it reads as verified.
 

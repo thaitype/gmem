@@ -1,0 +1,5 @@
+{
+  "match": "rules/*.md",
+  "schema": ".typdoc/schemas/free.json",
+  "validation": { "frontmatter.unknown": { "level": "off" } }
+}

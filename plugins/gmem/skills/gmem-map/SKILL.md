@@ -60,7 +60,9 @@ conflict the higher layer wins. Notes and `retro/` are context, not authority.
 |---|---|
 | `gmem-judge` | Periodically tidy the learnings: revise rough ones in place, raise proposals in `proposals/` for facts worth promoting to precedents or rules. Non-blocking — learnings stay valid regardless. |
 | `gmem-tidy` | Now and then, audit memory against the rules for each layer and the real code, decide fixes with the user, then apply them. |
+| `gmem-check` | Check, without changing anything, that memory follows gmem's rules and that its format is right. Run it before committing memory. |
 | `gmem-setup` | Choose or inspect where each kind of memory is kept. |
+| `gmem-typdoc` | In the `gmem-extensions` plugin: set up typdoc so `gmem-check` checks frontmatter against schemas. Optional. |
 
 Promoting to a precedent or rule is a human step: add the file to `precedents/` or
 `rules/<topic>.md`, and its row to that folder's `index.md` (one row per file: file →

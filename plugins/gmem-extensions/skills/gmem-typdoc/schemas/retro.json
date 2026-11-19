@@ -1,0 +1,7 @@
+{
+  "name": "retro",
+  "fields": {
+    "author": { "type": "string", "required": true },
+    "created": { "type": "date", "required": true }
+  }
+}

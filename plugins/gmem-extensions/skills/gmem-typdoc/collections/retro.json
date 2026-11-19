@@ -1,0 +1,4 @@
+{
+  "match": "retro/*.md",
+  "schema": ".typdoc/schemas/retro.json"
+}

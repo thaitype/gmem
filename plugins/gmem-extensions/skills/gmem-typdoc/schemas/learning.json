@@ -1,0 +1,8 @@
+{
+  "name": "learning",
+  "fields": {
+    "author": { "type": "string", "required": true },
+    "reviewer": { "type": "string" },
+    "created": { "type": "date", "required": true }
+  }
+}
