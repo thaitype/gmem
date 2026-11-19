@@ -1,11 +1,18 @@
 ---
 name: typmem-retro
-description: Write a retrospective diary entry capturing the story of a work session — what you set out to do, what happened, decisions made, dead ends hit, and unfinished threads — to ~/.typmem/memory/retro/YYYY-MM-DD-<slug>.md. Use this whenever wrapping up work, when the user says they are done / stopping for now / "end of session", when a meaningful chunk of work concludes, or when asked to "write a retro", "log what happened", "record today", or "capture this session". Reach for it even if the user never says the word "retro" — any end-of-work wrap-up is a trigger. Do NOT use this to capture durable facts, gotchas, or how-things-work lessons; those are learnings — use typmem-learn for those.
+description: Write a retrospective diary entry capturing the story of a work session — what you set out to do, what happened, decisions made, dead ends hit, and unfinished threads — to `retro/YYYY-MM-DD-<slug>.md` in the configured memory location. Use this whenever wrapping up work, when the user says they are done / stopping for now / "end of session", when a meaningful chunk of work concludes, or when asked to "write a retro", "log what happened", "record today", or "capture this session". Reach for it even if the user never says the word "retro" — any end-of-work wrap-up is a trigger. Do NOT use this to capture durable facts, gotchas, or how-things-work lessons; those are learnings — use typmem-learn for those.
 ---
 
 # typmem-retro
 
-Write the diary entry for a chunk of work. A retro is the story of *what happened to you* — useful to tomorrow-you (or your successor) who needs to resume quickly. It is one of several memory layers under `~/.typmem/memory/`; retro is the raw diary lane, not a reviewed or promoted artifact.
+Write the diary entry for a chunk of work. A retro is the story of *what happened to you* — useful to tomorrow-you (or your successor) who needs to resume quickly. It is one of several memory layers under `<memory>/`; retro is the raw diary lane, not a reviewed or promoted artifact.
+
+## Where this lives
+
+Resolve the typmem config first, using the rules in `typmem-setup`. This skill uses the
+`location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`;
+with the defaults that is `<project>/.typmem/memory/`. If there is no config, use the
+defaults and carry on; mention once that `typmem-setup` can change where memory is kept.
 
 ## Retro vs learning — read this first
 
@@ -33,9 +40,9 @@ Guidance, not a rigid template (the body format is intentionally loose for now �
 ## How to write it
 
 1. Resolve today's date in local time as `YYYY-MM-DD`.
-2. Make sure the directory exists: `mkdir -p ~/.typmem/memory/retro`
+2. Make sure the directory exists: `mkdir -p <memory>/retro`
 3. Build a short slug describing what this session was about: lowercase kebab-case, 2–5 words, hyphen-separated, no spaces (e.g. `aca-tailscale-sidecar`, `resh-rhai-parser`).
-4. Target file: `~/.typmem/memory/retro/YYYY-MM-DD-<slug>.md` (date prefix + slug — retro is the only memory layer that uses a date in the filename). Each session/topic gets its own file.
+4. Target file: `<memory>/retro/YYYY-MM-DD-<slug>.md` (date prefix + slug — retro is the only memory layer that uses a date in the filename). Each session/topic gets its own file.
 5. Create the file with this frontmatter, then the diary body:
    ```
    ---
@@ -49,7 +56,7 @@ Guidance, not a rigid template (the body format is intentionally loose for now �
 
 ## File rules
 
-- Location: `~/.typmem/memory/retro/`
+- Location: `<memory>/retro/`
 - Filename: `YYYY-MM-DD-<slug>.md` (one file per session/topic; slug is a short lowercase kebab-case descriptor)
 - Frontmatter (MVP): `author`, `created`. No `reviewer` — retro is never reviewed.
 - Body: free-form diary, no fixed template yet.

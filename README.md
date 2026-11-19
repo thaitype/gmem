@@ -6,12 +6,20 @@ install skills
 npx skills@latest add thaitype/typmem
 ```
 
+## Where memory is stored
+
+Run `typmem-setup` to choose where `memory` and `note` are kept (this project, your
+home directory, or a custom path). With no config the default is the project:
+`<project>/.typmem/memory/`. Earlier versions stored everything in `~/.typmem/memory/`;
+to keep using that, set `memory = "${USER}"` in your typmem config.
+
 ## Place this in CLAUDE.md
 
 ```md
 ## Memory (typmem)
 
-You have a persistent memory system at `~/.typmem/memory/`. Use it on every task —
+You have a persistent memory system in the memory folder set by `typmem-setup`
+(default `<project>/.typmem/memory/`). Use it on every task —
 both to inform your work and to record what you learn. Don't let hard-won facts
 evaporate when a session ends.
 
@@ -44,7 +52,7 @@ On any conflict the higher layer wins. (`retro/` is a side lane, not authority.)
 - `typmem-retro` — at the end of a meaningful chunk of work, write the session
   diary, then pull any durable facts out of it into learnings.
 - `typmem-judge` — periodically tidy the learnings: revise rough ones in place,
-  raise proposals in `~/.typmem/memory/proposals/` for facts worth promoting to
+  raise proposals in that folder's `proposals/` for facts worth promoting to
   precedents or rules. Non-blocking — learnings stay valid regardless.
 
 Rhythm: recall before working, validate before finalizing, capture learnings as

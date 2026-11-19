@@ -1,11 +1,18 @@
 ---
 name: typmem-learn
-description: Capture a durable fact — a "learning" / recipe card — to ~/.typmem/memory/learnings/. A learning is a distilled, timeless fact about the world (a gotcha, a constraint, a how-things-work truth) that stays useful long after the work that produced it is done. Use this whenever you discover something worth keeping, when the user says "remember this", "note that", "save this", "TIL", or "lesson learned", and use it to extract durable facts out of a retro after a session. This is the primary memory-capture skill — reach for it often, even when the user doesn't say the word "learning". Do NOT use it for session narrative, status, or what-happened-today; that is a retro — use typmem-retro for those.
+description: Capture a durable fact — a "learning" / recipe card — to the `learnings/` folder of the configured memory location. A learning is a distilled, timeless fact about the world (a gotcha, a constraint, a how-things-work truth) that stays useful long after the work that produced it is done. Use this whenever you discover something worth keeping, when the user says "remember this", "note that", "save this", "TIL", or "lesson learned", and use it to extract durable facts out of a retro after a session. This is the primary memory-capture skill — reach for it often, even when the user doesn't say the word "learning". Do NOT use it for session narrative, status, or what-happened-today; that is a retro — use typmem-retro for those.
 ---
 
 # typmem-learn
 
-Capture one durable fact as a recipe card under `~/.typmem/memory/learnings/`. A learning is *what you now know about the world* — useful to anyone, indefinitely, even someone who never saw the painful session that produced it. A learning is **valid and usable the moment you capture it** — it does not wait for any review. `typmem-judge` later tidies learnings and may propose that the strongest ones be promoted to `precedents/` or `rules.md`, but that is optional and non-blocking.
+Capture one durable fact as a recipe card under `<memory>/learnings/`. A learning is *what you now know about the world* — useful to anyone, indefinitely, even someone who never saw the painful session that produced it. A learning is **valid and usable the moment you capture it** — it does not wait for any review. `typmem-judge` later tidies learnings and may propose that the strongest ones be promoted to `precedents/` or `rules.md`, but that is optional and non-blocking.
+
+## Where this lives
+
+Resolve the typmem config first, using the rules in `typmem-setup`. This skill uses the
+`location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`;
+with the defaults that is `<project>/.typmem/memory/`. If there is no config, use the
+defaults and carry on; mention once that `typmem-setup` can change where memory is kept.
 
 ## Learning vs retro — read this first
 
@@ -32,14 +39,14 @@ Example of the move — turn a diary sentence into a recipe card:
 ## Two ways to use this
 
 - **Direct capture (default).** You (or the user) have a fact in mind right now → write one learning file.
-- **Extract from a retro.** Point at a retro file (or the latest one in `~/.typmem/memory/retro/`) → read it, pull out each durable fact, and write one learning file per fact. Distil — do not copy the narrative across.
+- **Extract from a retro.** Point at a retro file (or the latest one in `<memory>/retro/`) → read it, pull out each durable fact, and write one learning file per fact. Distil — do not copy the narrative across.
 
 ## How to write it
 
-1. Make sure the directory exists: `mkdir -p ~/.typmem/memory/learnings`
+1. Make sure the directory exists: `mkdir -p <memory>/learnings`
 2. Distil the fact and run the test above. If it fails (it only matters for this session), stop — it belongs in `typmem-retro`, not here.
 3. Build a slug from the **fact itself** (not the session): lowercase kebab-case, 2–6 words, no spaces (e.g. `iii-engine-no-prebuilt-binary`, `aca-sidecar-no-host-network`).
-4. Target file: `~/.typmem/memory/learnings/<slug>.md` — no date prefix. Learnings are timeless; only retro carries a date in the filename.
+4. Target file: `<memory>/learnings/<slug>.md` — no date prefix. Learnings are timeless; only retro carries a date in the filename.
 5. Write this frontmatter, then the body:
    ```
    ---
@@ -56,7 +63,7 @@ When extracting from a retro, repeat steps 2–7 once per durable fact you find.
 
 ## File rules
 
-- Location: `~/.typmem/memory/learnings/`
+- Location: `<memory>/learnings/`
 - Filename: `<slug>.md` — no date prefix (timeless fact)
 - Frontmatter (MVP): `author`, `reviewer` (empty — `typmem-judge` fills it once it has looked), `created`
 - One fact per file

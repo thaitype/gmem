@@ -1,12 +1,19 @@
 ---
 name: typmem-judge
 description: >-
-   Review captured learnings (acting as an LLM-as-judge) in ~/.typmem/memory/learnings/ and decide automatically what to do with each — revise it in place when the fix is cheap and safe, or raise a proposal in ~/.typmem/memory/proposals/ when it should be promoted, conflicts with a higher layer, or is unclear. Use this when asked to "judge", "review the learnings", "vet the inbox", "triage learnings", "clean up captured facts", or after a batch of typmem-learn captures has piled up. This never blocks: learnings are valid and usable whether or not a human ever acts on a proposal. Do NOT use it to write precedents or rules directly (those come from a human acting on a proposal), and do NOT use it on retros (retros are diaries and are never reviewed).
+   Review captured learnings (acting as an LLM-as-judge) in the `learnings/` folder of the configured memory location and decide automatically what to do with each — revise it in place when the fix is cheap and safe, or raise a proposal in its `proposals/` folder when it should be promoted, conflicts with a higher layer, or is unclear. Use this when asked to "judge", "review the learnings", "vet the inbox", "triage learnings", "clean up captured facts", or after a batch of typmem-learn captures has piled up. This never blocks: learnings are valid and usable whether or not a human ever acts on a proposal. Do NOT use it to write precedents or rules directly (those come from a human acting on a proposal), and do NOT use it on retros (retros are diaries and are never reviewed).
 ---
 
 # typmem-judge
 
 Act as the AI judge over captured learnings. Your job is to keep the `learnings/` set clean and to surface the few items worth a human's attention — without ever blocking. **Learnings are valid and usable the moment they are captured.** Nothing here gates them; a human acting (or never acting) on your proposals does not change that.
+
+## Where this lives
+
+Resolve the typmem config first, using the rules in `typmem-setup`. This skill uses the
+`location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`;
+with the defaults that is `<project>/.typmem/memory/`. If there is no config, use the
+defaults and carry on; mention once that `typmem-setup` can change where memory is kept.
 
 ## Where this sits
 
@@ -18,7 +25,7 @@ precedents/   created by a human acting on a proposal — not by you
 rules.md      created by a human acting on a proposal — not by you
 ```
 
-You operate over `~/.typmem/memory/learnings/` and write only to `~/.typmem/memory/learnings/` (revisions) and `~/.typmem/memory/proposals/` (proposals). You never write `precedents/` or `rules.md`, and you never touch `retro/`.
+You operate over `<memory>/learnings/` and write only to `<memory>/learnings/` (revisions) and `<memory>/proposals/` (proposals). You never write `precedents/` or `rules.md`, and you never touch `retro/`.
 
 ## The `reviewer` field = "already judged"
 
@@ -59,10 +66,10 @@ In every case the learning stays valid and usable. A proposal is advice, not a g
 
 ## How to run
 
-1. Ensure dirs exist: `mkdir -p ~/.typmem/memory/proposals`
+1. Ensure dirs exist: `mkdir -p <memory>/proposals`
 2. Find unjudged learnings (empty `reviewer`):
    ```
-   grep -rLE '^reviewer:[[:space:]]*\S' ~/.typmem/memory/learnings/
+   grep -rLE '^reviewer:[[:space:]]*\S' <memory>/learnings/
    ```
 3. Load context for dedup / conflict / promotion checks: the other learnings, `precedents/`, and `rules.md`.
 4. For each learning: apply the rubric, pick an outcome, act (revise the file, and/or write a proposal), then set its `reviewer`.
@@ -73,7 +80,7 @@ A run only touches empty-`reviewer` learnings, so re-running skips everything al
 
 ## Proposal file
 
-- Location: `~/.typmem/memory/proposals/`
+- Location: `<memory>/proposals/`
 - Filename: `<slug>.md` — a short kebab-case label of the proposed action (e.g. `promote-aca-sidecar-constraint`, `resolve-conflict-retry-policy`). No date prefix.
 - Frontmatter (MVP): `author` (your judge identity), `created`.
 - Body: which learning(s) it concerns (paths), the recommended action (promote-to-precedent / promote-to-rule / resolve-conflict-with `<higher entry>` / review-for-removal), and a one-paragraph rationale — enough for a human to decide fast.
