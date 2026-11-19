@@ -1,6 +1,6 @@
 ---
 name: gmem-setup
-description: Sets up or inspects gmem's config, which decides where memory and notes are stored — in the project or at user level. Use when the user wants to set up gmem, change where memory or notes are kept, check which config is in effect, or when another gmem skill finds no config. Not for converting old typmem or crew folders — use gmem-migrate.
+description: Sets up or inspects gmem's config, which decides where memory and notes are stored — in the project or at user level. Use when the user wants to set up gmem, change where memory or notes are kept, check which config is in effect, check or install the skills gmem-tidy depends on (grilling, wayfinder), or when another gmem skill finds no config. Not for converting old typmem or crew folders — use gmem-migrate.
 ---
 
 # gmem-setup
@@ -92,6 +92,28 @@ config -> /path/to/project/.gmem/gmem-config.toml
 ```
 
 Create the folders only when something is first saved into them, not during setup.
+
+## Dependencies
+
+`gmem-tidy` decides its fixes with the user through two skills from
+[mattpocock/skills](https://github.com/mattpocock/skills): `grilling` for a handful of
+related decisions, `wayfinder` for many independent ones. `wayfinder` also calls
+`research` for its research tickets.
+
+At the end of setup, and whenever the user asks to check dependencies:
+
+1. Check which of these three are among the skills available in this session:
+   `grilling`, `wayfinder`, `research`.
+2. If all are there, say so in one line.
+3. If any are missing, list them and show the command that installs all three:
+   ```
+   npx skills@latest add mattpocock/skills --skill grilling wayfinder research
+   ```
+   Add `-g` to install at user level instead of this project. Run it only if the user
+   says so. A newly installed skill may only show up in a new session.
+
+These are optional: without them `gmem-tidy` still works, asking its questions one at a
+time.
 
 ## Not this skill's job
 

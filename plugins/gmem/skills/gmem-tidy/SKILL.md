@@ -25,7 +25,7 @@ that contradicts the code is the most expensive kind, because it reads as verifi
 
 Report the findings grouped by rule, and count the decisions they need. Then recommend how to decide them: one
 question at a time for a handful of related decisions, or a map of independent decisions for many (use `/grilling`
-or `/wayfinder` if installed). The user picks.
+or `/wayfinder` if installed; `gmem-setup` checks and installs them). The user picks.
 
 ## Authority-layer rules
 
