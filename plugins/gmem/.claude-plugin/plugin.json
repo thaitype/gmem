@@ -1,5 +1,5 @@
 {
-  "name": "typmem",
+  "name": "gmem",
   "description": "Persistent agent memory: capture learnings, write session retros, and judge what to promote.",
   "version": "0.1.0",
   "author": {

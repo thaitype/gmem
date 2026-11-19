@@ -1,31 +1,31 @@
 ---
-name: typmem-note
-description: Write or update a short status note for the current project/topic in the configured note location, so another agent or a fresh session can pick up quickly without re-explaining. Answers "what's true right now" — a different question than typmem-retro's "what happened / what did I learn". On-demand only. Use when the user asks to save/record the current status, or says something like "note this down for next time", "leave a status note", or "typmem-note".
+name: gmem-note
+description: Write or update a short status note for the current project/topic in the configured note location, so another agent or a fresh session can pick up quickly without re-explaining. Answers "what's true right now" — a different question than gmem-retro's "what happened / what did I learn". On-demand only. Use when the user asks to save/record the current status, or says something like "note this down for next time", "leave a status note", or "gmem-note".
 ---
 
-# typmem-note
+# gmem-note
 
 A short, current-state record of a project/topic, written to the note location so
 whoever opens it next — another agent, or a later session — can
 pick up without asking "where did we leave off?"
 
-`typmem-retro` and this skill answer different questions. Retro asks "what happened /
+`gmem-retro` and this skill answer different questions. Retro asks "what happened /
 what did I learn from this work" — reflective, has a timeline, decisions, dead ends.
 This skill asks "what's true right now" — a status board, no narrative, no "I did X then
 Y". If what you're about to write is reflecting on how the work went, that's
-`typmem-retro`'s job, not this one.
+`gmem-retro`'s job, not this one.
 
 This skill only writes. If you need to read a note back, just open the file — there's no
 list/summarize function here.
 
 ## Location and filename
 
-Resolve the typmem config first, using the rules in `typmem-setup`. This skill uses the
+Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
 `location.note` key.
 
 - Directory: `<location.note>/<memory_dir>/note/`, called `<note>` below. With the
-  defaults that is `<project>/.typmem/note/`. If there is no config, use the defaults and
-  carry on; mention once that `typmem-setup` can change where notes are kept.
+  defaults that is `<project>/.gmem/note/`. If there is no config, use the defaults and
+  carry on; mention once that `gmem-setup` can change where notes are kept.
 - Filename: `YYYY-MM-DD_HHMM_<topic>.md` — the timestamp is from when the note was
   **first created** for this topic. It does not change on later updates.
 
@@ -78,7 +78,7 @@ notes updatable, not a form to fill in.
 ## Rules
 
 - NEVER write a reflective narrative — if it reads like a story of how the work went,
-  point the user at `typmem-retro` instead.
+  point the user at `gmem-retro` instead.
 - NEVER create a second file for a topic that already has one — find and update the
   existing file (Step 1/2).
 - NEVER do a full-file overwrite on update — edit only what changed (surgical edit).

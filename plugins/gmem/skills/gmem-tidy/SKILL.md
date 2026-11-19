@@ -1,16 +1,16 @@
 ---
-name: typmem-tidy
-description: State exactly what compliant memory looks like — the authority layers (rules, precedents, proposals, learnings) and active memory (correction, reference) — scan the chosen scope first, then decide with the user one question at a time, apply, leave a ledger trace and rebuild the index files. Use when asked to "tidy memory", "clean up memory", "audit memory", or "typmem-tidy".
+name: gmem-tidy
+description: State exactly what compliant memory looks like — the authority layers (rules, precedents, proposals, learnings) and active memory (correction, reference) — scan the chosen scope first, then decide with the user one question at a time, apply, leave a ledger trace and rebuild the index files. Use when asked to "tidy memory", "clean up memory", "audit memory", or "gmem-tidy".
 ---
 
-# typmem-tidy
+# gmem-tidy
 
 ## Where this lives
 
-Resolve the typmem config first, using the rules in `typmem-setup`. This skill uses the
+Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
 `location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`;
-with the defaults that is `<project>/.typmem/memory/`. If there is no config, use the
-defaults and carry on; mention once that `typmem-setup` can change where memory is kept.
+with the defaults that is `<project>/.gmem/memory/`. If there is no config, use the
+defaults and carry on; mention once that `gmem-setup` can change where memory is kept.
 
 ## 1. Ask scope
 
@@ -39,7 +39,7 @@ to read it).
   decision has superseded it), and is not a near-duplicate of another precedent on the same topic. Flag any that fail
   one of these; never rewrite its content.
 
-**`learnings/`**: resolve via `typmem-judge`. Revise cheap fixes in place, or raise a proposal when a learning conflicts
+**`learnings/`**: resolve via `gmem-judge`. Revise cheap fixes in place, or raise a proposal when a learning conflicts
 with `rules/`/`precedents/`, generalizes badly, or is unclear.
 
 **`proposals/`**: live when the situation it names still exists and no rule/precedent has since answered it. Flag as

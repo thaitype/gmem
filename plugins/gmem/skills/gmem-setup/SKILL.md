@@ -1,53 +1,53 @@
 ---
-name: typmem-setup
-description: Set up or inspect typmem's config, which decides where each kind of memory (memory, note) is stored — in the project or at the user level. Use when the user asks to set up typmem, change where memory or notes are kept, check which typmem config is in effect, or when a typmem skill finds no config and needs one. Also use for "typmem-setup".
+name: gmem-setup
+description: Set up or inspect gmem's config, which decides where each kind of memory (memory, note) is stored — in the project or at the user level. Use when the user asks to set up gmem, change where memory or notes are kept, check which gmem config is in effect, or when a gmem skill finds no config and needs one. Also use for "gmem-setup".
 ---
 
-# typmem-setup
+# gmem-setup
 
-typmem reads a small TOML config that says where each kind of memory lives. This skill
+gmem reads a small TOML config that says where each kind of memory lives. This skill
 explains how that config is resolved and, when there is none, walks the user through
 creating one.
 
 ## The config
 
 ```toml
-memory_dir = ".typmem"      # folder name under the base; default ".typmem"
+memory_dir = ".gmem"      # folder name under the base; default ".gmem"
 
 [location]
-memory = "${PROJECT}"       # where `typmem-memory` entries live
-note   = "${USER}"          # where `typmem-note` entries live
+memory = "${PROJECT}"       # where `gmem-memory` entries live
+note   = "${USER}"          # where `gmem-note` entries live
 ```
 
 - `${PROJECT}` = the project root: the git root, or the current directory if not a git repo.
 - `${USER}` = the user's home directory (`~/`).
 - A location can also be a **custom path** instead of one of those two: an absolute
-  path (`/data/typmem`), a home path (`~/work/typmem`), a path built on a variable
+  path (`/data/gmem`), a home path (`~/work/gmem`), a path built on a variable
   (`${PROJECT}/docs`), or a relative path (resolved against `${PROJECT}`).
 - A kind's folder is `<base>/<memory_dir>/<kind>/`, where `<base>` is the location value
   and `<kind>` is `memory` or `note`. With the example above: memory is in
-  `<project>/.typmem/memory/`, notes are in `~/.typmem/note/`. With
-  `note = "/data/typmem"`, notes are in `/data/typmem/.typmem/note/`.
+  `<project>/.gmem/memory/`, notes are in `~/.gmem/note/`. With
+  `note = "/data/gmem"`, notes are in `/data/gmem/.gmem/note/`.
 
-Defaults when a key is missing: `memory_dir = ".typmem"`, `memory = "${PROJECT}"`,
+Defaults when a key is missing: `memory_dir = ".gmem"`, `memory = "${PROJECT}"`,
 `note = "${PROJECT}"`.
 
 ## Which skill uses which key
 
-- `location.memory` is used by **`typmem-memory`**: its entries are stored in the
+- `location.memory` is used by **`gmem-memory`**: its entries are stored in the
   resolved `memory` folder.
-- `location.note` is used by **`typmem-note`**: its entries are stored in the resolved
+- `location.note` is used by **`gmem-note`**: its entries are stored in the resolved
   `note` folder.
 
 Each of those skills resolves the config as described below before it reads or writes.
 
-## Resolution (read this before any typmem skill reads or writes memory)
+## Resolution (read this before any gmem skill reads or writes memory)
 
 Look for the config in three places. Highest priority first:
 
-1. `<project>/typmem-config.toml`
-2. `<project>/.typmem/typmem-config.toml`
-3. `~/.typmem/typmem-config.toml`
+1. `<project>/gmem-config.toml`
+2. `<project>/.gmem/gmem-config.toml`
+3. `~/.gmem/gmem-config.toml`
 
 Rules:
 
@@ -66,9 +66,9 @@ Ask **one question at a time**. Show the choices, wait for the answer, then move
 
 1. **Where should the config live?** Offer two options:
    - **User level** — set up once, used by every project.
-     Writes `~/.typmem/typmem-config.toml`.
+     Writes `~/.gmem/gmem-config.toml`.
    - **Project level** — set up per project, so each project is configured on its own.
-     Writes `<project>/.typmem/typmem-config.toml`.
+     Writes `<project>/.gmem/gmem-config.toml`.
 2. **Where should `memory` live?** Project (`${PROJECT}`), user (`${USER}`), or a custom
    path the user types in.
 3. **Where should `note` live?** Project (`${PROJECT}`), user (`${USER}`), or a custom
@@ -86,15 +86,15 @@ Before writing:
 After writing, print the resolved folders, for example:
 
 ```
-memory -> /path/to/project/.typmem/memory
-note   -> /Users/you/.typmem/note
-config -> /path/to/project/.typmem/typmem-config.toml
+memory -> /path/to/project/.gmem/memory
+note   -> /Users/you/.gmem/note
+config -> /path/to/project/.gmem/gmem-config.toml
 ```
 
 Create the folders only when something is first saved into them, not during setup.
 
 ## Not this skill's job
 
-- Writing memory or notes themselves — that is `typmem-memory` and `typmem-note`.
+- Writing memory or notes themselves — that is `gmem-memory` and `gmem-note`.
 - Other memory kinds (learnings, retros, precedents, rules) — not configurable yet;
   only `memory` and `note` are.

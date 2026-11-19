@@ -1,27 +1,27 @@
 ---
-name: typmem-learn
-description: Capture a durable fact — a "learning" / recipe card — to the `learnings/` folder of the configured memory location. A learning is a distilled, timeless fact about the world (a gotcha, a constraint, a how-things-work truth) that stays useful long after the work that produced it is done. Use this whenever you discover something worth keeping, when the user says "remember this", "note that", "save this", "TIL", or "lesson learned", and use it to extract durable facts out of a retro after a session. This is the primary memory-capture skill — reach for it often, even when the user doesn't say the word "learning". Do NOT use it for session narrative, status, or what-happened-today; that is a retro — use typmem-retro for those.
+name: gmem-learn
+description: Capture a durable fact — a "learning" / recipe card — to the `learnings/` folder of the configured memory location. A learning is a distilled, timeless fact about the world (a gotcha, a constraint, a how-things-work truth) that stays useful long after the work that produced it is done. Use this whenever you discover something worth keeping, when the user says "remember this", "note that", "save this", "TIL", or "lesson learned", and use it to extract durable facts out of a retro after a session. This is the primary memory-capture skill — reach for it often, even when the user doesn't say the word "learning". Do NOT use it for session narrative, status, or what-happened-today; that is a retro — use gmem-retro for those.
 ---
 
-# typmem-learn
+# gmem-learn
 
-Capture one durable fact as a recipe card under `<memory>/learnings/`. A learning is *what you now know about the world* — useful to anyone, indefinitely, even someone who never saw the painful session that produced it. A learning is **valid and usable the moment you capture it** — it does not wait for any review. `typmem-judge` later tidies learnings and may propose that the strongest ones be promoted to `precedents/` or `rules/`, but that is optional and non-blocking.
+Capture one durable fact as a recipe card under `<memory>/learnings/`. A learning is *what you now know about the world* — useful to anyone, indefinitely, even someone who never saw the painful session that produced it. A learning is **valid and usable the moment you capture it** — it does not wait for any review. `gmem-judge` later tidies learnings and may propose that the strongest ones be promoted to `precedents/` or `rules/`, but that is optional and non-blocking.
 
 ## Where this lives
 
-Resolve the typmem config first, using the rules in `typmem-setup`. This skill uses the
+Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
 `location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`;
-with the defaults that is `<project>/.typmem/memory/`. If there is no config, use the
-defaults and carry on; mention once that `typmem-setup` can change where memory is kept.
+with the defaults that is `<project>/.gmem/memory/`. If there is no config, use the
+defaults and carry on; mention once that `gmem-setup` can change where memory is kept.
 
 ## Learning vs retro — read this first
 
 - **Learning = recipe card.** "What I now know about the world." A distilled fact. No story, no timeline, no `I`. True regardless of which day or project hit it. → goes here.
-- **Retro = diary.** "What happened to me." Status, decisions-in-flight, dead ends, follow-ups. → goes to `typmem-retro`.
+- **Retro = diary.** "What happened to me." Status, decisions-in-flight, dead ends, follow-ups. → goes to `gmem-retro`.
 
 The test: **"Will this still matter after the work that produced it is finished?"**
 - Yes → it is a learning. Capture it here.
-- No → it is retro material. Do NOT write it here; it belongs in `typmem-retro`.
+- No → it is retro material. Do NOT write it here; it belongs in `gmem-retro`.
 
 ## What makes a good learning
 
@@ -44,7 +44,7 @@ Example of the move — turn a diary sentence into a recipe card:
 ## How to write it
 
 1. Make sure the directory exists: `mkdir -p <memory>/learnings`
-2. Distil the fact and run the test above. If it fails (it only matters for this session), stop — it belongs in `typmem-retro`, not here.
+2. Distil the fact and run the test above. If it fails (it only matters for this session), stop — it belongs in `gmem-retro`, not here.
 3. Build a slug from the **fact itself** (not the session): lowercase kebab-case, 2–6 words, no spaces (e.g. `iii-engine-no-prebuilt-binary`, `aca-sidecar-no-host-network`).
 4. Target file: `<memory>/learnings/<slug>.md` — no date prefix. Learnings are timeless; only retro carries a date in the filename.
 5. Write this frontmatter, then the body:
@@ -55,9 +55,9 @@ Example of the move — turn a diary sentence into a recipe card:
    created: YYYY-MM-DD
    ---
    ```
-   **Leave `reviewer` empty.** An empty `reviewer` just means `typmem-judge` has not looked at this one yet — it does not mean the learning is unusable. The learning is valid right away. Do not fill `reviewer` in from this skill.
+   **Leave `reviewer` empty.** An empty `reviewer` just means `gmem-judge` has not looked at this one yet — it does not mean the learning is unusable. The learning is valid right away. Do not fill `reviewer` in from this skill.
 6. Body: state the fact in recipe-card shape — a short, self-contained claim. Free-form prose is fine; no fixed template yet. Keep the discipline: no `I`, no timeline.
-7. If a file with that slug already exists: it is probably the same fact. Either refine the slug to be more specific, or update the existing file rather than creating a near-duplicate. (Automatic dedup comes later with `typmem-judge` / index search — for now, use judgement.)
+7. If a file with that slug already exists: it is probably the same fact. Either refine the slug to be more specific, or update the existing file rather than creating a near-duplicate. (Automatic dedup comes later with `gmem-judge` / index search — for now, use judgement.)
 
 When extracting from a retro, repeat steps 2–7 once per durable fact you find.
 
@@ -65,12 +65,12 @@ When extracting from a retro, repeat steps 2–7 once per durable fact you find.
 
 - Location: `<memory>/learnings/`
 - Filename: `<slug>.md` — no date prefix (timeless fact)
-- Frontmatter (MVP): `author`, `reviewer` (empty — `typmem-judge` fills it once it has looked), `created`
+- Frontmatter (MVP): `author`, `reviewer` (empty — `gmem-judge` fills it once it has looked), `created`
 - One fact per file
 
 ## Don't
 
-- Don't write session narrative, status, or what-happened here — that is a retro (`typmem-retro`).
-- Don't fill in `reviewer` yourself — that is `typmem-judge`'s job; an empty field just means the judge hasn't looked at it yet, not that the learning is unusable.
+- Don't write session narrative, status, or what-happened here — that is a retro (`gmem-retro`).
+- Don't fill in `reviewer` yourself — that is `gmem-judge`'s job; an empty field just means the judge hasn't looked at it yet, not that the learning is unusable.
 - Don't bundle multiple facts into one file — split them so each can be judged and promoted independently.
 - Don't promote a learning to `precedents/` from here — that is a human review step handled by a later skill.

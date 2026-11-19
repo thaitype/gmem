@@ -1,11 +1,11 @@
 ---
-name: typmem-recall
-description: Pull relevant memory before starting non-trivial work, or when resuming earlier work. Resolves the typmem config, then reads in priority order — the rules index, the precedents index, the active memory index, and in-progress/blocked notes — opening only what touches the task. Learnings, retros, the ledger and done notes are reference, opened only when needed. Weighs what it finds by authority (rules > precedents > active memory > learnings). Use this at the start of a task, when the user asks "what do we know about X", "have we hit this before", "check memory first", or before finalizing a consequential decision/plan that should be validated against memory. Do NOT use it to write memory — that is typmem-learn/typmem-retro/typmem-judge/typmem-memory/typmem-note; this skill only reads.
+name: gmem-recall
+description: Pull relevant memory before starting non-trivial work, or when resuming earlier work. Resolves the gmem config, then reads in priority order — the rules index, the precedents index, the active memory index, and in-progress/blocked notes — opening only what touches the task. Learnings, retros, the ledger and done notes are reference, opened only when needed. Weighs what it finds by authority (rules > precedents > active memory > learnings). Use this at the start of a task, when the user asks "what do we know about X", "have we hit this before", "check memory first", or before finalizing a consequential decision/plan that should be validated against memory. Do NOT use it to write memory — that is gmem-learn/gmem-retro/gmem-judge/gmem-memory/gmem-note; this skill only reads.
 ---
 
-# typmem-recall
+# gmem-recall
 
-Read memory and notes for whatever is relevant to the task in front of you, and bring it back as a short, usable brief — not a dump of file contents. This is the read side of typmem; it never writes.
+Read memory and notes for whatever is relevant to the task in front of you, and bring it back as a short, usable brief — not a dump of file contents. This is the read side of gmem; it never writes.
 
 ## When to reach for this
 
@@ -18,12 +18,12 @@ Skip it for trivial, throwaway asks where recall adds nothing (e.g. "format this
 
 ## Where this lives
 
-Resolve the typmem config first, using the rules in `typmem-setup`. This skill uses both keys:
+Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses both keys:
 
-- `<memory>` = `<location.memory>/<memory_dir>/memory/` (default `<project>/.typmem/memory/`)
-- `<note>` = `<location.note>/<memory_dir>/note/` (default `<project>/.typmem/note/`)
+- `<memory>` = `<location.memory>/<memory_dir>/memory/` (default `<project>/.gmem/memory/`)
+- `<note>` = `<location.note>/<memory_dir>/note/` (default `<project>/.gmem/note/`)
 
-The two can live in different places. If there is no config, use the defaults and carry on; mention once that `typmem-setup` can change where memory and notes are kept. A folder that doesn't exist just means nothing is recorded there yet.
+The two can live in different places. If there is no config, use the defaults and carry on; mention once that `gmem-setup` can change where memory and notes are kept. A folder that doesn't exist just means nothing is recorded there yet.
 
 ## Authority — weigh what you find accordingly
 
@@ -76,7 +76,7 @@ On conflict, the higher layer wins: rules > precedents > active memory > learnin
    ```
 6. Read the full content of every file you rely on — don't act on a filename, index row or grep snippet alone.
 7. **Brief.** Group what you found: binding (rules, precedents), current understanding (active memory), open work (notes), and any reference you opened — each with its source file. If nothing relevant turns up, say so plainly rather than forcing a match.
-8. If you notice a gap — a situation memory doesn't cover — flag it and suggest `typmem-learn` (or `typmem-memory`) once the work produces the answer. Don't write it yourself from here.
+8. If you notice a gap — a situation memory doesn't cover — flag it and suggest `gmem-learn` (or `gmem-memory`) once the work produces the answer. Don't write it yourself from here.
 
 ## Don't
 

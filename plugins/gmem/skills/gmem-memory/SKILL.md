@@ -1,9 +1,9 @@
 ---
-name: typmem-memory
-description: Maintain a curated, editable knowledge base of current understanding — corrections to past mistakes and reference notes on how things work — organized by topic with an index, plus an optional dated ledger. Use when the user wants to record, update, or review that understanding, or asks to "add to memory", "update memory", or "typmem-memory". For a single atomic fact captured as-is, use typmem-learn instead.
+name: gmem-memory
+description: Maintain a curated, editable knowledge base of current understanding — corrections to past mistakes and reference notes on how things work — organized by topic with an index, plus an optional dated ledger. Use when the user wants to record, update, or review that understanding, or asks to "add to memory", "update memory", or "gmem-memory". For a single atomic fact captured as-is, use gmem-learn instead.
 ---
 
-# typmem-memory
+# gmem-memory
 
 This is a loose set of conventions for managing durable knowledge — not a
 strict procedure. Use judgment throughout; the goal is to keep useful facts easy to find
@@ -11,23 +11,23 @@ later, not to follow a rigid checklist.
 
 ## Where this lives
 
-Resolve the typmem config first, using the rules in `typmem-setup`. This skill uses the
+Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
 `location.memory` key. Its folder is:
 
 ```
 <location.memory>/<memory_dir>/memory/      # called <memory> below
 ```
 
-With the defaults that is `<project>/.typmem/memory/`. If there is no config, use the
-defaults and carry on; mention once that `typmem-setup` can change where memory is kept.
+With the defaults that is `<project>/.gmem/memory/`. If there is no config, use the
+defaults and carry on; mention once that `gmem-setup` can change where memory is kept.
 Create folders only when something is first written into them.
 
 ## What belongs here vs elsewhere
 
-- **A single atomic, timeless fact to capture as-is?** → that's `typmem-learn`'s job,
+- **A single atomic, timeless fact to capture as-is?** → that's `gmem-learn`'s job,
   not this one.
 - **Just the current status of one project/topic, no lasting "fact" to it?** → that's
-  `typmem-note`'s job.
+  `gmem-note`'s job.
 - **Understanding you maintain over time** — a correction to something you got wrong, or
   a reference on how something works — that you'd revise in place as it changes
   → that's what lives here.
@@ -62,11 +62,11 @@ believed, that's what the ledger is for (write a dated entry there before changi
 ## Rules
 
 - NEVER use this for a one-off atomic fact to capture as-is — that goes through
-  `typmem-learn`.
-- NEVER treat this as a project status board — that's `typmem-note`.
+  `gmem-learn`.
+- NEVER treat this as a project status board — that's `gmem-note`.
 - NEVER force a ledger entry for every `active/` change — best-effort only.
 - NEVER build an archive/inactive-flag mechanism for retired facts — just edit or remove
   from `active/`.
 - No fixed frontmatter is required — write whatever's useful.
 - NEVER write a topic file directly under `active/` — it goes in `correction/` or
-  `reference/`, with its row in `index.md`. (`typmem-tidy` checks the two categories.)
+  `reference/`, with its row in `index.md`. (`gmem-tidy` checks the two categories.)

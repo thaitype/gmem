@@ -1,19 +1,19 @@
 ---
-name: typmem-judge
+name: gmem-judge
 description: >-
-   Review captured learnings (acting as an LLM-as-judge) in the `learnings/` folder of the configured memory location and decide automatically what to do with each — revise it in place when the fix is cheap and safe, or raise a proposal in its `proposals/` folder when it should be promoted, conflicts with a higher layer, or is unclear. Use this when asked to "judge", "review the learnings", "vet the inbox", "triage learnings", "clean up captured facts", or after a batch of typmem-learn captures has piled up. This never blocks: learnings are valid and usable whether or not a human ever acts on a proposal. Do NOT use it to write precedents or rules directly (those come from a human acting on a proposal), and do NOT use it on retros (retros are diaries and are never reviewed).
+   Review captured learnings (acting as an LLM-as-judge) in the `learnings/` folder of the configured memory location and decide automatically what to do with each — revise it in place when the fix is cheap and safe, or raise a proposal in its `proposals/` folder when it should be promoted, conflicts with a higher layer, or is unclear. Use this when asked to "judge", "review the learnings", "vet the inbox", "triage learnings", "clean up captured facts", or after a batch of gmem-learn captures has piled up. This never blocks: learnings are valid and usable whether or not a human ever acts on a proposal. Do NOT use it to write precedents or rules directly (those come from a human acting on a proposal), and do NOT use it on retros (retros are diaries and are never reviewed).
 ---
 
-# typmem-judge
+# gmem-judge
 
 Act as the AI judge over captured learnings. Your job is to keep the `learnings/` set clean and to surface the few items worth a human's attention — without ever blocking. **Learnings are valid and usable the moment they are captured.** Nothing here gates them; a human acting (or never acting) on your proposals does not change that.
 
 ## Where this lives
 
-Resolve the typmem config first, using the rules in `typmem-setup`. This skill uses the
+Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
 `location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`;
-with the defaults that is `<project>/.typmem/memory/`. If there is no config, use the
-defaults and carry on; mention once that `typmem-setup` can change where memory is kept.
+with the defaults that is `<project>/.gmem/memory/`. If there is no config, use the
+defaults and carry on; mention once that `gmem-setup` can change where memory is kept.
 
 ## Where this sits
 
@@ -34,7 +34,7 @@ You operate over `<memory>/learnings/` and write only to `<memory>/learnings/` (
 - empty `reviewer` → not yet judged. Process it.
 - filled `reviewer` → already judged. Skip it.
 
-When you finish processing a learning (whichever outcome), set `reviewer` to your judge identity and a date, e.g. `reviewer: typmem-judge/<model> 2026-06-07`. Leave `author` and `created` unchanged.
+When you finish processing a learning (whichever outcome), set `reviewer` to your judge identity and a date, e.g. `reviewer: gmem-judge/<model> 2026-06-07`. Leave `author` and `created` unchanged.
 
 ## The rubric
 

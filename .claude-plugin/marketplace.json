@@ -1,17 +1,23 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "typmem",
-  "description": "typmem: persistent memory skills for coding agents",
+  "name": "gmem",
+  "description": "gmem: persistent memory skills for coding agents",
   "owner": {
     "name": "thaitype",
-    "url": "https://github.com/thaitype/typmem"
+    "url": "https://github.com/thaitype/garden-memory"
   },
   "plugins": [
     {
-      "name": "typmem",
+      "name": "gmem",
       "description": "Persistent agent memory: capture learnings, write session retros, and judge what to promote.",
       "version": "0.1.0",
-      "source": "./plugins/typmem"
+      "source": "./plugins/gmem"
+    },
+    {
+      "name": "gmem-tools",
+      "description": "Maintenance tools for gmem: migrate older gmem and crew-style memory to the current layout.",
+      "version": "0.1.0",
+      "source": "./plugins/gmem-tools"
     }
   ]
 }
