@@ -1,21 +1,26 @@
 {
-  "name": "typmem",
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "gmem",
+  "description": "gmem: persistent memory skills for coding agents",
   "owner": {
     "name": "thaitype",
-    "url": "https://github.com/thaitype/typmem"
-  },
-  "metadata": {
-    "pluginRoot": "./"
+    "url": "https://github.com/thaitype/gmem"
   },
   "plugins": [
     {
-      "name": "typmem-skills",
-      "source": "./",
-      "skills": [
-        "./skills/typmem-judge",
-        "./skills/typmem-learn",
-        "./skills/typmem-retro"
-      ]
+      "name": "gmem",
+      "description": "Persistent agent memory: capture learnings, write session retros, and judge what to promote.",
+      "source": "./plugins/gmem"
+    },
+    {
+      "name": "gmem-tools",
+      "description": "Maintenance tools for gmem: migrate older gmem and crew-style memory to the current layout.",
+      "source": "./plugins/gmem-tools"
+    },
+    {
+      "name": "gmem-extensions",
+      "description": "Optional extensions for gmem: set up typdoc so gmem-check checks memory frontmatter against schemas.",
+      "source": "./plugins/gmem-extensions"
     }
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "name": "gmem-extensions",
+  "description": "Optional extensions for gmem: set up typdoc so gmem-check checks memory frontmatter against schemas.",
+  "version": "1.0.0-alpha",
+  "author": {
+    "name": "thaitype"
+  }
+}

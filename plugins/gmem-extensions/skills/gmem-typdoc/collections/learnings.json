@@ -1,0 +1,4 @@
+{
+  "match": "learnings/*.md",
+  "schema": ".typdoc/schemas/learning.json"
+}

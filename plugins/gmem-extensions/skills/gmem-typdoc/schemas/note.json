@@ -1,0 +1,11 @@
+{
+  "name": "note",
+  "fields": {
+    "status": {
+      "type": "enum",
+      "values": ["in-progress", "blocked", "done"],
+      "required": true,
+      "default": "in-progress"
+    }
+  }
+}

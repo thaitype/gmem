@@ -1,0 +1,4 @@
+{
+  "match": "note/*.md",
+  "schema": ".typdoc/schemas/note.json"
+}

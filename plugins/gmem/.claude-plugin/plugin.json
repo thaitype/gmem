@@ -1,0 +1,8 @@
+{
+  "name": "gmem",
+  "description": "Persistent agent memory: capture learnings, write session retros, and judge what to promote.",
+  "version": "1.0.0-alpha",
+  "author": {
+    "name": "thaitype"
+  }
+}

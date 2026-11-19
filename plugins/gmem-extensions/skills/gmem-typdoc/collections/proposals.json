@@ -1,0 +1,4 @@
+{
+  "match": "proposals/*.md",
+  "schema": ".typdoc/schemas/proposal.json"
+}
