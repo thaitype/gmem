@@ -1,21 +1,17 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "typmem",
+  "description": "typmem: persistent memory skills for coding agents",
   "owner": {
     "name": "thaitype",
     "url": "https://github.com/thaitype/typmem"
   },
-  "metadata": {
-    "pluginRoot": "./"
-  },
   "plugins": [
     {
-      "name": "typmem-skills",
-      "source": "./",
-      "skills": [
-        "./skills/typmem-judge",
-        "./skills/typmem-learn",
-        "./skills/typmem-retro"
-      ]
+      "name": "typmem",
+      "description": "Persistent agent memory: capture learnings, write session retros, and judge what to promote.",
+      "version": "0.1.0",
+      "source": "./plugins/typmem"
     }
   ]
 }
