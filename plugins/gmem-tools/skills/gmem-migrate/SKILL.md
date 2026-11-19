@@ -51,7 +51,7 @@ names.
 | `<memory>/rules.md` | the file exists | Split by topic into `rules/<topic>.md` (propose the split; the user confirms — rules are human-owned) and write `rules/index.md` |
 | `precedents/` without an index | no `precedents/index.md`, or files missing from it | Write the missing rows; draft each "when to read" from the file, user confirms |
 | Old skill names | `typmem-*`, `typ-wait-listen-me`, `typ-wrap-up-memory` in `CLAUDE.md` / `AGENTS.md` | Rename to `gmem-*`; `typ-wait-listen-me` → `gmem-stop`, `typ-wrap-up-memory` → `gmem-bye` |
-| Old CLAUDE.md block | a `## Memory (typmem)` or `## Memory (gmem)` section that differs from the current README snippet | Show the diff; replace only if the user agrees |
+| Old CLAUDE.md block | a long `## Memory (typmem)` or `## Memory (gmem)` section (memory shapes, authority, skill list, rhythm) instead of the short pointer to `gmem-map` in the current README | Show the diff; replace the section with the pointer only if the user agrees. Anything in it that isn't in `gmem-map` (a project-specific addition), point out and keep |
 
 ### B. Crew layout (`locker/`)
 

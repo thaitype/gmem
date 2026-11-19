@@ -4,7 +4,7 @@
   "description": "gmem: persistent memory skills for coding agents",
   "owner": {
     "name": "thaitype",
-    "url": "https://github.com/thaitype/garden-memory"
+    "url": "https://github.com/thaitype/gmem"
   },
   "plugins": [
     {

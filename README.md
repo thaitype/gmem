@@ -24,7 +24,7 @@ checked with `git diff`, and traced to the person who put it there.
 install skills
 
 ```
-npx skills@latest add thaitype/garden-memory
+npx skills@latest add thaitype/gmem
 ```
 
 ## Where memory is stored
@@ -47,55 +47,9 @@ shows a dry-run plan first, asks before every judgment call, and never deletes f
 ```md
 ## Memory (gmem)
 
-You have a persistent memory system in the memory folder set by `gmem-setup`
-(default `<project>/.gmem/memory/`). Use it on every task —
-both to inform your work and to record what you learn. Don't let hard-won facts
-evaporate when a session ends.
-
-Two shapes of memory, separated by one test — "will this still matter after this
-work is done?":
-- **Learning** (recipe card) — a durable fact about the world: a gotcha, a
-  constraint, a how-things-work truth. No "I", no timeline. Valid and usable the
-  moment it's captured. (yes to the test)
-- **Retro** (diary) — the story of a session: what happened, decisions, dead
-  ends, what's unfinished. Written for tomorrow-you. (no to the test)
-
-Authority hierarchy, highest to lowest: **`rules/` > `precedents/` > `active/` >
-`learnings/`**. On any conflict the higher layer wins. (Notes and `retro/` are
-context, not authority.)
-
-### Use memory (every task)
-
-- **Recall — before starting non-trivial work.** Run `gmem-recall`. It reads, in
-  order: `rules/index.md`, `precedents/index.md`, `active/index.md`, and notes
-  that are `in-progress` or `blocked`, opening only what touches the task.
-  Learnings, retros and done notes are reference, opened only when needed.
-- **Validate — before finalizing consequential output, plans, or decisions.**
-  Check them against the hierarchy: never violate a rule; align with precedents
-  unless you have a clear, stated reason; treat learnings as advice. If you hit a
-  situation memory doesn't cover, that's a gap — capture it with `gmem-learn`.
-
-### Record memory
-
-- `gmem-learn` — capture a durable fact. **Reach for this constantly** — any
-  time you hit a gotcha or learn how something really works, capture it, even if
-  no one asked. The primary memory action.
-- `gmem-retro` — at the end of a meaningful chunk of work, write the session
-  diary, then pull any durable facts out of it into learnings.
-- `gmem-judge` — periodically tidy the learnings: revise rough ones in place,
-  raise proposals in that folder's `proposals/` for facts worth promoting to
-  precedents or rules. Non-blocking — learnings stay valid regardless.
-- `gmem-stop` — manual-only: when the user says you got something wrong, invoke
-  it to write the correction into `active/correction/`. Never triggered on its own.
-- `gmem-bye` — on any wrap-up or goodbye, walk through note, memory, retro and
-  learn, and record whichever has something worth keeping.
-- `gmem-tidy` — now and then, audit memory against the rules for each layer
-  and the real code, decide fixes with the user, then apply them.
-- Promoting to a precedent or rule is a human step: add the file to `precedents/`
-  or `rules/<topic>.md`, and its row to that folder's `index.md` (one row per
-  file: file → when to read it) in the same change.
-
-Rhythm: recall before working, validate before finalizing, capture learnings as
-you go, run bye when a chunk concludes, run the judge and tidy now and then. Never
-wait on review — memory is usable immediately.
+This project uses gmem. At the start of a session or before non-trivial work, open
+`gmem-map` and follow it.
 ```
+
+The map itself lives in the `gmem-map` skill, so updating the plugin updates every
+project that points to it.
