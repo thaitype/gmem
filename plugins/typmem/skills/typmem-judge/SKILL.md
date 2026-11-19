@@ -22,10 +22,10 @@ retro/        diary — never reviewed
 learnings/    valid immediately · you revise these in place
 proposals/    async queue you write to · human may act, or not
 precedents/   created by a human acting on a proposal — not by you
-rules.md      created by a human acting on a proposal — not by you
+rules/        created by a human acting on a proposal — not by you
 ```
 
-You operate over `<memory>/learnings/` and write only to `<memory>/learnings/` (revisions) and `<memory>/proposals/` (proposals). You never write `precedents/` or `rules.md`, and you never touch `retro/`.
+You operate over `<memory>/learnings/` and write only to `<memory>/learnings/` (revisions) and `<memory>/proposals/` (proposals). You never write `precedents/` or `rules/`, and you never touch `retro/`.
 
 ## The `reviewer` field = "already judged"
 
@@ -56,7 +56,7 @@ Judge each learning against:
 - merge a clear exact / near-exact duplicate into the existing learning
 
 **2. Raise a proposal** (write to `proposals/`, non-blocking) — only in these cases:
-- **Promote** — the fact is broad, recurring, or high-impact enough that it belongs in `precedents/` or `rules.md`. (Keep the bar high — most learnings just stay learnings.)
+- **Promote** — the fact is broad, recurring, or high-impact enough that it belongs in `precedents/` or `rules/`. (Keep the bar high — most learnings just stay learnings.)
 - **Conflict** — it contradicts an existing precedent or rule. The higher layer wins for now; whether to update the higher layer is a human call.
 - **Unclear / risky** — you are not confident enough to revise it safely, or the only "fix" would lose or invent information (e.g. it looks like diary leakage with no clearly salvageable fact → propose removal).
 
@@ -71,7 +71,7 @@ In every case the learning stays valid and usable. A proposal is advice, not a g
    ```
    grep -rLE '^reviewer:[[:space:]]*\S' <memory>/learnings/
    ```
-3. Load context for dedup / conflict / promotion checks: the other learnings, `rules.md`, and `precedents/` (start from `precedents/index.md`, then open the files that bear on the learnings at hand; also read any precedent file the index doesn't list).
+3. Load context for dedup / conflict / promotion checks: the other learnings, `rules/`, and `precedents/` (for each, start from its `index.md`, then open the files that bear on the learnings at hand; also read any file the index doesn't list).
 4. For each learning: apply the rubric, pick an outcome, act (revise the file, and/or write a proposal), then set its `reviewer`.
 5. Before writing a proposal, check `proposals/` for an existing one on the same subject — do not raise a duplicate.
 6. End with a short report: revised N, proposed M (with file + action + one-line reason each), left K as-is.
@@ -84,16 +84,16 @@ A run only touches empty-`reviewer` learnings, so re-running skips everything al
 - Filename: `<slug>.md` — a short kebab-case label of the proposed action (e.g. `promote-aca-sidecar-constraint`, `resolve-conflict-retry-policy`). No date prefix.
 - Frontmatter (MVP): `author` (your judge identity), `created`.
 - Body: which learning(s) it concerns (paths), the recommended action (promote-to-precedent / promote-to-rule / resolve-conflict-with `<higher entry>` / review-for-removal), and a one-paragraph rationale — enough for a human to decide fast.
-- For **promote-to-precedent**, also include the proposed precedent filename and the row to add to `precedents/index.md`, ready to paste:
+- For **promote-to-precedent** or **promote-to-rule**, also include the proposed target file (`precedents/<slug>.md`, or `rules/<topic>.md` — an existing topic file to extend, or a new one) and, for a new file, the row to add to that folder's `index.md`, ready to paste:
   ```
   | <slug>.md | <when to read it> |
   ```
 
-The human may pick up a proposal and promote it to a higher layer, or ignore it. When promoting to a precedent, the human adds the file and its row in `precedents/index.md` together. If ignored, the underlying learning remains valid; the proposal just sits in the queue.
+The human may pick up a proposal and promote it to a higher layer, or ignore it. When promoting, the human adds the file and its row in that folder's `index.md` together. If ignored, the underlying learning remains valid; the proposal just sits in the queue.
 
 ## Don't
 
-- Don't write `precedents/` or `rules.md` — those come from a human acting on a proposal.
+- Don't write `precedents/` or `rules/` — those come from a human acting on a proposal.
 - Don't touch `retro/` — retros are diaries and are never reviewed.
 - Don't block, gate, or mark a learning unusable — every learning is valid as captured.
 - Don't hard-delete a learning — if it should go, raise a review-for-removal proposal and let the human decide.

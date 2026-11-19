@@ -5,7 +5,7 @@ description: Capture a durable fact — a "learning" / recipe card — to the `l
 
 # typmem-learn
 
-Capture one durable fact as a recipe card under `<memory>/learnings/`. A learning is *what you now know about the world* — useful to anyone, indefinitely, even someone who never saw the painful session that produced it. A learning is **valid and usable the moment you capture it** — it does not wait for any review. `typmem-judge` later tidies learnings and may propose that the strongest ones be promoted to `precedents/` or `rules.md`, but that is optional and non-blocking.
+Capture one durable fact as a recipe card under `<memory>/learnings/`. A learning is *what you now know about the world* — useful to anyone, indefinitely, even someone who never saw the painful session that produced it. A learning is **valid and usable the moment you capture it** — it does not wait for any review. `typmem-judge` later tidies learnings and may propose that the strongest ones be promoted to `precedents/` or `rules/`, but that is optional and non-blocking.
 
 ## Where this lives
 

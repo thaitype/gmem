@@ -31,14 +31,14 @@ work is done?":
 - **Retro** (diary) — the story of a session: what happened, decisions, dead
   ends, what's unfinished. Written for tomorrow-you. (no to the test)
 
-Authority hierarchy, highest to lowest: **`rules.md` > `precedents/` > `active/` >
+Authority hierarchy, highest to lowest: **`rules/` > `precedents/` > `active/` >
 `learnings/`**. On any conflict the higher layer wins. (Notes and `retro/` are
 context, not authority.)
 
 ### Use memory (every task)
 
 - **Recall — before starting non-trivial work.** Run `typmem-recall`. It reads, in
-  order: `rules.md` (always), `precedents/index.md`, `active/index.md`, and notes
+  order: `rules/index.md`, `precedents/index.md`, `active/index.md`, and notes
   that are `in-progress` or `blocked`, opening only what touches the task.
   Learnings, retros and done notes are reference, opened only when needed.
 - **Validate — before finalizing consequential output, plans, or decisions.**
@@ -56,9 +56,9 @@ context, not authority.)
 - `typmem-judge` — periodically tidy the learnings: revise rough ones in place,
   raise proposals in that folder's `proposals/` for facts worth promoting to
   precedents or rules. Non-blocking — learnings stay valid regardless.
-- Promoting to a precedent is a human step: add the file to `precedents/` and its
-  row to `precedents/index.md` (one row per file: file → when to read it) in the
-  same change.
+- Promoting to a precedent or rule is a human step: add the file to `precedents/`
+  or `rules/<topic>.md`, and its row to that folder's `index.md` (one row per
+  file: file → when to read it) in the same change.
 
 Rhythm: recall before working, validate before finalizing, capture learnings as
 you go, write a retro when a chunk concludes, run the judge now and then. Never

@@ -1,6 +1,6 @@
 ---
 name: typmem-recall
-description: Pull relevant memory before starting non-trivial work, or when resuming earlier work. Resolves the typmem config, then reads in priority order — rules.md (always), the precedents index, the active memory index, and in-progress/blocked notes — opening only what touches the task. Learnings, retros, the ledger and done notes are reference, opened only when needed. Weighs what it finds by authority (rules > precedents > active memory > learnings). Use this at the start of a task, when the user asks "what do we know about X", "have we hit this before", "check memory first", or before finalizing a consequential decision/plan that should be validated against memory. Do NOT use it to write memory — that is typmem-learn/typmem-retro/typmem-judge/typmem-memory/typmem-note; this skill only reads.
+description: Pull relevant memory before starting non-trivial work, or when resuming earlier work. Resolves the typmem config, then reads in priority order — the rules index, the precedents index, the active memory index, and in-progress/blocked notes — opening only what touches the task. Learnings, retros, the ledger and done notes are reference, opened only when needed. Weighs what it finds by authority (rules > precedents > active memory > learnings). Use this at the start of a task, when the user asks "what do we know about X", "have we hit this before", "check memory first", or before finalizing a consequential decision/plan that should be validated against memory. Do NOT use it to write memory — that is typmem-learn/typmem-retro/typmem-judge/typmem-memory/typmem-note; this skill only reads.
 ---
 
 # typmem-recall
@@ -25,42 +25,39 @@ Resolve the typmem config first, using the rules in `typmem-setup`. This skill u
 
 The two can live in different places. If there is no config, use the defaults and carry on; mention once that `typmem-setup` can change where memory and notes are kept. A folder that doesn't exist just means nothing is recorded there yet.
 
-## Read order
-
-Tiers 1–4 are checked every time. Each is cheap: one short file, or an index that points at the few files worth opening.
-
-```
-1. Rule        <memory>/rules.md                read whole
-2. Precedent   <memory>/precedents/index.md     read index → open matching rows
-3. Memory      <memory>/active/index.md         read index → open matching rows
-               <memory>/active/correction/lessons.md   read whole
-4. Note        <note>/*.md with status in-progress or blocked
-               → read in full the ones touching the task; list the rest by name
-── Reference (open only when needed) ──
-   <memory>/learnings/, <memory>/retro/, the ledger (<memory>/YYYY-MM-DD_HHMM_*.md),
-   notes with status done, <memory>/proposals/
-```
-
 ## Authority — weigh what you find accordingly
 
+Read top to bottom: the order you read in is also the order of authority. Tiers 1–4 are checked every time. Each is cheap: one short file, or an index that points at the few files worth opening.
+
 ```
-rules.md        highest — never violate
-precedents/     align with, unless you have a clear, stated reason not to
-active/         current understanding — trust it over learnings
-learnings/      advice — useful, but not binding
-note / retro    context only, not authority — tells you where work stands, not what is true
+1. Rule        <memory>/rules/index.md          read index → open matching rows
+               highest — never violate
+2. Precedent   <memory>/precedents/index.md     read index → open matching rows
+               align with, unless you have a clear, stated reason not to
+3. Memory      <memory>/active/index.md         read index → open matching rows
+               <memory>/active/correction/lessons.md   read whole
+               current understanding — trust it over learnings
+4. Note        <note>/*.md with status in-progress or blocked
+               → read in full the ones touching the task; list the rest by name
+               context only — tells you where work stands, not what is true
+── Reference (open only when needed) ──
+   <memory>/learnings/   advice — useful, but not binding
+   <memory>/retro/, the ledger (<memory>/YYYY-MM-DD_HHMM_*.md), notes with
+   status done, <memory>/proposals/   context only, not authority
 ```
 
-On conflict, the higher layer wins. Mention the conflict — don't silently pick the lower one.
+On conflict, the higher layer wins: rules > precedents > active memory > learnings. Notes and retros never override any of them. Mention the conflict — don't silently pick the lower one.
 
 ## How to recall
 
-1. **Rule.** Read `<memory>/rules.md` whole if present.
-2. **Precedent.** Read `<memory>/precedents/index.md` and open every row whose "when to read" touches the task. Then check the index is complete:
+1. **Rule.** Read `<memory>/rules/index.md` and open every row whose "when to read" touches the task. When unsure whether a rule applies, open it — a missed rule costs more than an extra read.
+2. **Precedent.** Read `<memory>/precedents/index.md` and open every row whose "when to read" touches the task.
+
+   For both `rules/` and `precedents/`, check the index is complete:
    ```
-   ls <memory>/precedents/
+   ls <memory>/rules/ <memory>/precedents/
    ```
-   Any precedent file without a row in the index: read its name (and the file, if the name looks relevant), and tell the user the index is stale so they can add the row. If there is no index but there are precedent files, treat every file as unindexed.
+   Any file without a row in its index: read its name (and the file, if the name looks relevant), and tell the user the index is stale so they can add the row. If there is no index but there are files, treat every file as unindexed.
 3. **Memory.** Read `<memory>/active/index.md`, open the rows that touch the task, and read `active/correction/lessons.md` whole. If the index is missing or a topic file isn't in it, fall back to listing `active/correction/` and `active/reference/`.
 4. **Note.** Find open work:
    ```
@@ -84,7 +81,7 @@ On conflict, the higher layer wins. Mention the conflict — don't silently pick
 ## Don't
 
 - Don't write any file under `<memory>/` or `<note>/` — this skill is read-only. That includes fixing a stale index; report it instead.
-- Don't skip `rules.md` even for a "quick" task — it's meant to be cheap to check every time.
+- Don't skip `rules/index.md` even for a "quick" task — it's meant to be cheap to check every time.
 - Don't read every learning, retro or note "just in case" — reference is opened on need.
 - Don't treat a note or retro as authority — it says where work stands, not what is true.
 - Don't treat an empty `reviewer` field on a learning as "not usable yet" — every learning is valid the moment it's captured, judged or not.
