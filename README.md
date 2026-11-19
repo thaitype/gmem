@@ -40,6 +40,21 @@ Add the marketplace, then install the plugin:
 
 `gmem` has the memory skills and the session-start hook.
 
+We recommend that you turn off Claude Code's own auto memory. Otherwise Claude Code
+also saves memories on its own, outside gmem, and you lose the single place where you
+decide what is kept. Add this to `~/.claude/settings.json`:
+
+```json
+{
+  "env": {
+    "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"
+  }
+}
+```
+
+If the file already has an `env` block, add the key to it. The setting takes effect in
+the next session.
+
 ### Other agents
 
 ```
@@ -53,13 +68,12 @@ This installs the skills only, without the hook. See
 
 In this walkthrough, you set up gmem in one project, save how something works and
 where a piece of work stands, and see the agent pick up both in a fresh session. It
-assumes you installed the Claude Code plugin. If you installed with `npx skills@latest add`, call
-the skills without the `gmem:` prefix, for example `/gmem-setup`.
+assumes you installed the Claude Code plugin.
 
 1. Open Claude Code in your project and run the setup skill:
 
    ```
-   /gmem:gmem-setup
+   /gmem-setup
    ```
 
    The agent asks two questions, one at a time. For where the config lives, choose
@@ -180,8 +194,7 @@ it is memory. If the agent works something out, it is a learning.
 
 The agent reaches for `gmem-learn` on its own when it learns something worth keeping.
 `gmem-bye` runs at the end of a session and checks the other kinds. The one you call
-yourself is `gmem-stop` (`/gmem:gmem-stop`, or `/gmem-stop` after an `npx skills`
-install). Run it the moment you correct the agent, because the agent
+yourself is `gmem-stop` (`/gmem-stop`). Run it the moment you correct the agent, because the agent
 never runs it on its own. A one-line correction goes into
 `active/correction/lessons.md`, which `gmem-recall` reads on every task. A longer one
 gets its own file in `active/correction/` and a row in `active/index.md`.
@@ -290,11 +303,10 @@ skill:
 
 ```
 /plugin install gmem-tools@gmem
-/gmem-tools:gmem-migrate
+/gmem-migrate
 ```
 
 The `npx skills@latest add thaitype/gmem` install already includes `gmem-migrate`.
-Run it as `/gmem-migrate`.
 
 ## Opening the map at session start
 
