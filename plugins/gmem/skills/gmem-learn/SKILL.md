@@ -1,6 +1,6 @@
 ---
 name: gmem-learn
-description: Capture a durable fact — a "learning" / recipe card — to the `learnings/` folder of the configured memory location. A learning is a distilled, timeless fact about the world (a gotcha, a constraint, a how-things-work truth) that stays useful long after the work that produced it is done. Use this whenever you discover something worth keeping, when the user says "remember this", "note that", "save this", "TIL", or "lesson learned", and use it to extract durable facts out of a retro after a session. This is the primary memory-capture skill — reach for it often, even when the user doesn't say the word "learning". Do NOT use it for session narrative, status, or what-happened-today; that is a retro — use gmem-retro for those.
+description: Saves one durable, timeless fact — a gotcha, a constraint, or a how-things-work truth — as a learning card in gmem memory. Use whenever something worth keeping turns up mid-work, when pulling lasting facts out of a retro, or when the user says "remember this", "save this", "TIL", or "lesson learned", even if they never say "learning". Not for what happened in a session — use gmem-retro; not for revising what a topic already says — use gmem-memory.
 ---
 
 # gmem-learn

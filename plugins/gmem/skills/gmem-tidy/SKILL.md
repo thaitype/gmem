@@ -1,6 +1,6 @@
 ---
 name: gmem-tidy
-description: State exactly what compliant memory looks like — the authority layers (rules, precedents, proposals, learnings) and active memory (correction, reference) — scan the chosen scope first, then decide with the user one question at a time, apply, leave a ledger trace and rebuild the index files. Use when asked to "tidy memory", "clean up memory", "audit memory", or "gmem-tidy".
+description: Audits all of gmem memory against its layout rules — rules, precedents, proposals, learnings, and active memory — and fixes what is out of line together with the user, including facts that contradict the code and broken index files. Use when asked to "tidy memory", "clean up memory", or "audit memory", or when memory feels messy, duplicated, or out of date. Not for triaging new learnings only — use gmem-judge; not for converting an old layout — use gmem-migrate.
 ---
 
 # gmem-tidy

@@ -1,6 +1,6 @@
 ---
 name: gmem-recall
-description: Pull relevant memory before starting non-trivial work, or when resuming earlier work. Resolves the gmem config, then reads in priority order — the rules index, the precedents index, the active memory index, and in-progress/blocked notes — opening only what touches the task. Learnings, retros, the ledger and done notes are reference, opened only when needed. Weighs what it finds by authority (rules > precedents > active memory > learnings). Use this at the start of a task, when the user asks "what do we know about X", "have we hit this before", "check memory first", or before finalizing a consequential decision/plan that should be validated against memory. Do NOT use it to write memory — that is gmem-learn/gmem-retro/gmem-judge/gmem-memory/gmem-note; this skill only reads.
+description: Looks up what memory already says — rules, precedents, active notes, and open work — that bears on the task at hand. Use before starting non-trivial work, when resuming earlier work, before locking in a consequential decision or plan, or when the user asks "what do we know about X", "have we hit this before", or "check memory first", even if they don't mention memory. Read-only — to write, use gmem-learn, gmem-memory, gmem-retro, gmem-note, or gmem-judge.
 ---
 
 # gmem-recall

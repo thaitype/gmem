@@ -1,6 +1,6 @@
 ---
 name: gmem-migrate
-description: Migrate existing memory into the current gmem layout — from older versions, including the typmem name (.typmem/ folders, ~/.typmem/memory/, a single rules.md, precedents without an index, old skill names) and from the crew layout (locker/memory/, locker/note/, crew-note/crew-memory/crew-good-bye). Scans first, shows a dry-run plan, asks one question at a time for anything that needs judgment, applies only after confirmation, never deletes, and verifies indexes and links afterwards. Manual-only — invoke as "gmem-migrate".
+description: Migrates older memory into the current gmem layout — from typmem (.typmem/ folders, ~/.typmem/memory/, a single rules.md, old skill names) or the crew layout (locker/memory/, locker/note/, crew-note/crew-memory/crew-good-bye) — with a dry-run plan first and nothing deleted. Manual-only — run as /gmem-migrate.
 disable-model-invocation: true
 ---
 

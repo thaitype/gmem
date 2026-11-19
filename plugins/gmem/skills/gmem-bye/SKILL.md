@@ -1,6 +1,6 @@
 ---
 name: gmem-bye
-description: Wrap-up checkpoint that walks through every gmem writing skill — gmem-note, gmem-memory, gmem-retro, gmem-learn — and calls whichever ones actually have something worth recording, instead of relying on each one's own trigger firing separately. TRIGGER proactively on any work/session wrap-up or goodbye signal — "จบแล้ว", "จบงานแล้ว", "พอแค่นี้ก่อน", "หยุดตรงนี้ก่อน", "ปิดงาน", "ปิด session", "เดี๋ยวว่าง ๆ ค่อยคุยต่อ", "บาย", "ไปก่อนนะ", "ฝันดี", "done for now", "I'm done", "that's it for today", "stopping here", "wrapping up", "end of session", "bye", "good night", or the literal phrase "note/memory/retro if needed". Does not cover gmem-stop — that one is manual-only and correction-specific, not a wrap-up check.
+description: End-of-session checkpoint that checks whether anything from the session belongs in a note, memory, retro, or learning, and records only what qualifies. Use proactively on any wrap-up or goodbye signal in Thai or English — "จบแล้ว", "พอแค่นี้ก่อน", "บาย", "done for now", "wrapping up", "good night", or "note/memory/retro if needed" — even if the user doesn't mention memory. Not for logging a correction — use gmem-stop.
 ---
 
 # gmem-bye

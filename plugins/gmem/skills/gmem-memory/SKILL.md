@@ -1,6 +1,6 @@
 ---
 name: gmem-memory
-description: Maintain a curated, editable knowledge base of current understanding — corrections to past mistakes and reference notes on how things work — organized by topic with an index, plus an optional dated ledger. Use when the user wants to record, update, or review that understanding, or asks to "add to memory", "update memory", or "gmem-memory". For a single atomic fact captured as-is, use gmem-learn instead.
+description: Keeps a curated, editable knowledge base by topic — corrections to past mistakes and reference notes on how things work — revised in place as understanding changes. Use when the user wants to add to, update, or review what is known about a topic ("add to memory", "update memory", "that's outdated now"). Not for capturing one new fact — use gmem-learn; not for current project status — use gmem-note.
 ---
 
 # gmem-memory

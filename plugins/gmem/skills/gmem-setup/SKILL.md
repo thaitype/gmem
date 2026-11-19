@@ -1,6 +1,6 @@
 ---
 name: gmem-setup
-description: Set up or inspect gmem's config, which decides where each kind of memory (memory, note) is stored — in the project or at the user level. Use when the user asks to set up gmem, change where memory or notes are kept, check which gmem config is in effect, or when a gmem skill finds no config and needs one. Also use for "gmem-setup".
+description: Sets up or inspects gmem's config, which decides where memory and notes are stored — in the project or at user level. Use when the user wants to set up gmem, change where memory or notes are kept, check which config is in effect, or when another gmem skill finds no config. Not for converting old typmem or crew folders — use gmem-migrate.
 ---
 
 # gmem-setup

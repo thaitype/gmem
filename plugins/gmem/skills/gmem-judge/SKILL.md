@@ -1,7 +1,7 @@
 ---
 name: gmem-judge
 description: >-
-   Review captured learnings (acting as an LLM-as-judge) in the `learnings/` folder of the configured memory location and decide automatically what to do with each — revise it in place when the fix is cheap and safe, or raise a proposal in its `proposals/` folder when it should be promoted, conflicts with a higher layer, or is unclear. Use this when asked to "judge", "review the learnings", "vet the inbox", "triage learnings", "clean up captured facts", or after a batch of gmem-learn captures has piled up. This never blocks: learnings are valid and usable whether or not a human ever acts on a proposal. Do NOT use it to write precedents or rules directly (those come from a human acting on a proposal), and do NOT use it on retros (retros are diaries and are never reviewed).
+   Reviews the captured learnings and acts on each one — fixes small problems in place, or raises a proposal when a learning should be promoted, conflicts with a rule or precedent, or is unclear. Use when asked to "judge", "review the learnings", "triage learnings", "vet the inbox", or "clean up captured facts", or after many gmem-learn captures have piled up. Not for writing rules or precedents (a human acts on proposals), not for retros, and not for a full memory audit — use gmem-tidy.
 ---
 
 # gmem-judge

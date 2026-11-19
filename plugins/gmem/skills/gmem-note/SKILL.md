@@ -1,6 +1,6 @@
 ---
 name: gmem-note
-description: Write or update a short status note for the current project/topic in the configured note location, so another agent or a fresh session can pick up quickly without re-explaining. Answers "what's true right now" — a different question than gmem-retro's "what happened / what did I learn". On-demand only. Use when the user asks to save/record the current status, or says something like "note this down for next time", "leave a status note", or "gmem-note".
+description: Writes or updates a short status note for one project or topic — what is done, open, and next — so a fresh session or another agent can resume without re-explaining. Use when the user asks to save where things stand, "note this down for next time", or "leave a status note". Not for the story of a session — use gmem-retro; not for lasting facts — use gmem-learn.
 ---
 
 # gmem-note

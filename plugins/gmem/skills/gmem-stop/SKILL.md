@@ -1,6 +1,6 @@
 ---
 name: gmem-stop
-description: Manual-only capture for a correction. Invoke explicitly (never proactively inferred by the model) when someone tells you that you were wrong, missed something, or should have done differently. Writes a correction entry in active memory naming the mistake, the exact words that caught it, the signal to recognize it next time, and what to do instead.
+description: Records a correction after someone says the agent was wrong, missed something, or should have done differently — the mistake, the words that caught it, the signal to spot it next time, and what to do instead. Manual-only — run as /gmem-stop.
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: gmem-retro
-description: Write a retrospective diary entry capturing the story of a work session — what you set out to do, what happened, decisions made, dead ends hit, and unfinished threads — to `retro/YYYY-MM-DD-<slug>.md` in the configured memory location. Use this whenever wrapping up work, when the user says they are done / stopping for now / "end of session", when a meaningful chunk of work concludes, or when asked to "write a retro", "log what happened", "record today", or "capture this session". Reach for it even if the user never says the word "retro" — any end-of-work wrap-up is a trigger. Do NOT use this to capture durable facts, gotchas, or how-things-work lessons; those are learnings — use gmem-learn for those.
+description: Writes a dated diary entry of a work session — the goal, what happened, decisions, dead ends, and unfinished threads. Use when the user asks to write a retro, log what happened, record today, or capture this session, or right after a meaningful chunk of work concludes, even if they never say "retro". Not for the end-of-session checkpoint — gmem-bye decides whether a retro is needed; not for durable facts — use gmem-learn.
 ---
 
 # gmem-retro
