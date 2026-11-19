@@ -1,6 +1,6 @@
 ---
 name: gmem-learn
-description: Saves one durable, timeless fact — a gotcha, a constraint, or a how-things-work truth — as a learning card in gmem memory. Use whenever something worth keeping turns up mid-work, when pulling lasting facts out of a retro, or when the user says "remember this", "save this", "TIL", or "lesson learned", even if they never say "learning". Not for what happened in a session — use gmem-retro; not for revising what a topic already says — use gmem-memory.
+description: Saves one durable, timeless fact that was learned from the work itself — a gotcha hit, a constraint discovered, a mistake that turned out to have a general cause — as a learning card in gmem memory. Use whenever something like that turns up mid-work, when pulling lasting facts out of a retro, or when the user says "TIL" or "lesson learned", even if they never say "learning". Not for what happened in a session — use gmem-retro; not for how the project works when the user tells you, or for revising what a topic already says — use gmem-memory.
 ---
 
 # gmem-learn

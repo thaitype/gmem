@@ -1,6 +1,6 @@
 ---
 name: gmem-memory
-description: Keeps a curated, editable knowledge base by topic — corrections to past mistakes and reference notes on how things work — revised in place as understanding changes. Use when the user wants to add to, update, or review what is known about a topic ("add to memory", "update memory", "that's outdated now"). Not for capturing one new fact — use gmem-learn; not for current project status — use gmem-note.
+description: Keeps a curated, editable knowledge base by topic — corrections to past mistakes and reference notes on how things work — revised in place as understanding changes. Use when the user tells you how something works or wants to add to, update, or review what is known about a topic ("remember this", "save this", "add to memory", "update memory", "that's outdated now"). Not for a fact the agent learned from its own work — use gmem-learn; not for current project status — use gmem-note.
 ---
 
 # gmem-memory
