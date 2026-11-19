@@ -74,6 +74,10 @@ check below.
 
 Memory under `<memory>/`, rules and precedents have no required frontmatter.
 
+The required fields in the `fm.*` rows must match the base schemas in the
+`gmem-extensions` plugin (`gmem-typdoc/schemas/`). If you change one, change the other
+in the same commit.
+
 If typdoc is installed but not set up, mention once that `gmem-typdoc` sets it up.
 
 ## 3. Report

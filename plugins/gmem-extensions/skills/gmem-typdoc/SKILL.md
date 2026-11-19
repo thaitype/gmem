@@ -91,6 +91,10 @@ named after its kind (`memory.json`, `note.json`, `rules.json`, and so on), and 
 The files in `schemas/` and `collections/` are the source of truth. Read them there;
 don't restate them.
 
+The required fields in these base schemas must match the `fm.*` rows in `gmem-check`,
+which checks format when typdoc is not set up. If you change one, change the other in
+the same commit.
+
 Before writing:
 
 - If `.typdoc/` already exists in a folder, show what is there and what would change,
