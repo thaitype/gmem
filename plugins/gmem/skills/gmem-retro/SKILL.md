@@ -5,7 +5,7 @@ description: Writes a dated diary entry of a work session — the goal, what hap
 
 # gmem-retro
 
-Write the diary entry for a chunk of work. A retro is the story of *what happened to you* — useful to tomorrow-you (or your successor) who needs to resume quickly. It is one of several memory layers under `<memory>/`; retro is the raw diary lane, not a reviewed or promoted artifact.
+Write the diary entry for a chunk of work. A retro is the story of *what happened to you* — useful to tomorrow-you (or your successor) who needs to resume quickly. It is its own kind, stored under `<retro>/` (separate from `<memory>/`); retro is the raw diary lane, not a reviewed or promoted artifact.
 
 ## Where this lives
 

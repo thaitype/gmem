@@ -1,7 +1,7 @@
 {
   "name": "gmem-tools",
   "description": "Maintenance tools for gmem: migrate older gmem and crew-style memory to the current layout.",
-  "version": "0.1.0",
+  "version": "1.0.0-alpha",
   "author": {
     "name": "thaitype"
   }

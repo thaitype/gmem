@@ -87,9 +87,13 @@ them to fix links.
 With scope and approach chosen, work through the decisions with the user, carrying the rules above as context. Act
 only after the user confirms the shared understanding. When applying:
 
+0. Make sure every folder you will touch can be recovered. If it is in a git repo, commit any pending changes first;
+   that commit is the pre-tidy point. If it is not in git (the user-level `~/.gmem/...` folders by default), copy it
+   aside first, e.g. `cp -R <folder> <folder>.pre-tidy-YYYY-MM-DD_HHMM`, and tell the user where the copy is.
 1. `git mv` files you are moving (when source and target are in the same git repo), so history follows them; then edit.
 2. Write one ledger entry `<memory>/YYYY-MM-DD_HHMM_memory-tidy.md`: what moved where, what was removed and why, and
-   the pre-tidy commit to recover anything from (`git show <sha>:<path>`). Do not copy removed content into it.
+   where to recover anything from: the pre-tidy commit (`git show <sha>:<path>`) for folders in git, or the
+   pre-tidy copy's path for folders that are not. Do not copy removed content into it.
 3. Rewrite `active/index.md`: both categories, every file, a "when to read" column. Fix the `rules/index.md` and
    `precedents/index.md` rows the user confirmed.
 4. Check that every link inside `active/`, `rules/` and `precedents/` resolves, then commit each folder that is in a git repo.

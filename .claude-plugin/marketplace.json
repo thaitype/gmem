@@ -10,13 +10,11 @@
     {
       "name": "gmem",
       "description": "Persistent agent memory: capture learnings, write session retros, and judge what to promote.",
-      "version": "0.1.0",
       "source": "./plugins/gmem"
     },
     {
       "name": "gmem-tools",
       "description": "Maintenance tools for gmem: migrate older gmem and crew-style memory to the current layout.",
-      "version": "0.1.0",
       "source": "./plugins/gmem-tools"
     }
   ]
