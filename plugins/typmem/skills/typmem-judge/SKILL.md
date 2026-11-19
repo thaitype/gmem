@@ -71,7 +71,7 @@ In every case the learning stays valid and usable. A proposal is advice, not a g
    ```
    grep -rLE '^reviewer:[[:space:]]*\S' <memory>/learnings/
    ```
-3. Load context for dedup / conflict / promotion checks: the other learnings, `precedents/`, and `rules.md`.
+3. Load context for dedup / conflict / promotion checks: the other learnings, `rules.md`, and `precedents/` (start from `precedents/index.md`, then open the files that bear on the learnings at hand; also read any precedent file the index doesn't list).
 4. For each learning: apply the rubric, pick an outcome, act (revise the file, and/or write a proposal), then set its `reviewer`.
 5. Before writing a proposal, check `proposals/` for an existing one on the same subject — do not raise a duplicate.
 6. End with a short report: revised N, proposed M (with file + action + one-line reason each), left K as-is.
@@ -84,8 +84,12 @@ A run only touches empty-`reviewer` learnings, so re-running skips everything al
 - Filename: `<slug>.md` — a short kebab-case label of the proposed action (e.g. `promote-aca-sidecar-constraint`, `resolve-conflict-retry-policy`). No date prefix.
 - Frontmatter (MVP): `author` (your judge identity), `created`.
 - Body: which learning(s) it concerns (paths), the recommended action (promote-to-precedent / promote-to-rule / resolve-conflict-with `<higher entry>` / review-for-removal), and a one-paragraph rationale — enough for a human to decide fast.
+- For **promote-to-precedent**, also include the proposed precedent filename and the row to add to `precedents/index.md`, ready to paste:
+  ```
+  | <slug>.md | <when to read it> |
+  ```
 
-The human may pick up a proposal and promote it to a higher layer, or ignore it. If ignored, the underlying learning remains valid; the proposal just sits in the queue.
+The human may pick up a proposal and promote it to a higher layer, or ignore it. When promoting to a precedent, the human adds the file and its row in `precedents/index.md` together. If ignored, the underlying learning remains valid; the proposal just sits in the queue.
 
 ## Don't
 

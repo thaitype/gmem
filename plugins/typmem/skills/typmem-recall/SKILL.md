@@ -1,54 +1,92 @@
 ---
 name: typmem-recall
-description: Pull relevant memory from ~/.typmem/memory/ before starting non-trivial work, or when resuming earlier work. Reads rules.md (always), then searches precedents/ and learnings/ for anything relevant to the task at hand, and retro/ when picking up a paused thread. Weighs what it finds by authority (rules > precedents > learnings). Use this at the start of a task, when the user asks "what do we know about X", "have we hit this before", "check memory first", or before finalizing a consequential decision/plan that should be validated against memory. Do NOT use it to write memory — that is typmem-learn/typmem-retro/typmem-judge; this skill only reads.
+description: Pull relevant memory before starting non-trivial work, or when resuming earlier work. Resolves the typmem config, then reads in priority order — rules.md (always), the precedents index, the active memory index, and in-progress/blocked notes — opening only what touches the task. Learnings, retros, the ledger and done notes are reference, opened only when needed. Weighs what it finds by authority (rules > precedents > active memory > learnings). Use this at the start of a task, when the user asks "what do we know about X", "have we hit this before", "check memory first", or before finalizing a consequential decision/plan that should be validated against memory. Do NOT use it to write memory — that is typmem-learn/typmem-retro/typmem-judge/typmem-memory/typmem-note; this skill only reads.
 ---
 
 # typmem-recall
 
-Read `~/.typmem/memory/` for whatever is relevant to the task in front of you, and bring it back as a short, usable brief — not a dump of file contents. This is the read side of typmem; it never writes.
+Read memory and notes for whatever is relevant to the task in front of you, and bring it back as a short, usable brief — not a dump of file contents. This is the read side of typmem; it never writes.
 
 ## When to reach for this
 
 - **Before starting non-trivial work.** Anything more than a trivial one-liner deserves a quick check: has this constraint, gotcha, or decision already been recorded?
 - **Before finalizing consequential output** — a plan, a design decision, a piece of advice — validate it against memory rather than contradicting a known rule or precedent by accident.
-- **When resuming paused work.** Look for the relevant `retro/` entry to pick the thread back up.
+- **When resuming paused work.** The in-progress note is the first place to look; a `retro/` entry adds the story if needed.
 - **When the user asks directly** — "what do we know about X", "did we hit this before", "check memory", "any precedent for this".
 
 Skip it for trivial, throwaway asks where recall adds nothing (e.g. "format this JSON").
 
-## Authority order — weigh what you find accordingly
+## Where this lives
+
+Resolve the typmem config first, using the rules in `typmem-setup`. This skill uses both keys:
+
+- `<memory>` = `<location.memory>/<memory_dir>/memory/` (default `<project>/.typmem/memory/`)
+- `<note>` = `<location.note>/<memory_dir>/note/` (default `<project>/.typmem/note/`)
+
+The two can live in different places. If there is no config, use the defaults and carry on; mention once that `typmem-setup` can change where memory and notes are kept. A folder that doesn't exist just means nothing is recorded there yet.
+
+## Read order
+
+Tiers 1–4 are checked every time. Each is cheap: one short file, or an index that points at the few files worth opening.
+
+```
+1. Rule        <memory>/rules.md                read whole
+2. Precedent   <memory>/precedents/index.md     read index → open matching rows
+3. Memory      <memory>/active/index.md         read index → open matching rows
+               <memory>/active/correction/lessons.md   read whole
+4. Note        <note>/*.md with status in-progress or blocked
+               → read in full the ones touching the task; list the rest by name
+── Reference (open only when needed) ──
+   <memory>/learnings/, <memory>/retro/, the ledger (<memory>/YYYY-MM-DD_HHMM_*.md),
+   notes with status done, <memory>/proposals/
+```
+
+## Authority — weigh what you find accordingly
 
 ```
 rules.md        highest — never violate
 precedents/     align with, unless you have a clear, stated reason not to
+active/         current understanding — trust it over learnings
 learnings/      advice — useful, but not binding
-retro/          context only, not authority — use when resuming a specific thread
+note / retro    context only, not authority — tells you where work stands, not what is true
 ```
 
-On conflict between layers, the higher layer wins. If a learning contradicts a precedent or rule, trust the precedent/rule and mention the conflict — don't silently pick the learning.
+On conflict, the higher layer wins. Mention the conflict — don't silently pick the lower one.
 
 ## How to recall
 
-1. Ensure the directory exists before reading: if `~/.typmem/memory/` doesn't exist yet, there is nothing to recall — say so and move on.
-2. **Always read `rules.md`** if present (it's usually short — read it whole).
-3. **Search `precedents/` and `learnings/`** for anything touching the task's subject. There is no semantic index (yet) — search by grepping filenames and content for the task's key terms, synonyms, and the tech/component names involved:
+1. **Rule.** Read `<memory>/rules.md` whole if present.
+2. **Precedent.** Read `<memory>/precedents/index.md` and open every row whose "when to read" touches the task. Then check the index is complete:
    ```
-   grep -rli '<keyword>' ~/.typmem/memory/precedents/ ~/.typmem/memory/learnings/
+   ls <memory>/precedents/
    ```
-   Cast a slightly wide net — try a few keyword variants — since slugs are terse and won't always match your first guess.
-4. **Only when resuming earlier work**, also check `retro/` for the relevant session (search by topic keyword or, if known, by date):
+   Any precedent file without a row in the index: read its name (and the file, if the name looks relevant), and tell the user the index is stale so they can add the row. If there is no index but there are precedent files, treat every file as unindexed.
+3. **Memory.** Read `<memory>/active/index.md`, open the rows that touch the task, and read `active/correction/lessons.md` whole. If the index is missing or a topic file isn't in it, fall back to listing `active/correction/` and `active/reference/`.
+4. **Note.** Find open work:
    ```
-   grep -rli '<keyword>' ~/.typmem/memory/retro/
+   grep -lE '^status:[[:space:]]*(in-progress|blocked)' <note>/*.md
    ```
-   Read the most relevant one in full — retros are narrative, skimming loses the thread.
-5. Read the full content of every file that matched — don't act on a filename or grep snippet alone.
-6. Synthesize a brief for the task at hand: state what's binding (rules/precedents), what's useful advice (learnings), and what prior context applies (retro), each with its source file. If nothing relevant turns up, say so plainly rather than forcing a match.
-7. If you notice a gap while recalling — a situation memory doesn't cover — flag it and suggest `typmem-learn` once the work produces the answer. Don't write it yourself from here.
+   Read in full the notes whose topic touches the task. List the others by filename only — the user may want to know what else is open, but don't read them all.
+5. **Reference — only when needed.** Open learnings, retros, the ledger, done notes or proposals only when:
+   - something from tiers 1–4 points at them,
+   - the user asks "have we hit this before" / "any history on X",
+   - you are resuming a thread and the note doesn't explain enough (read the matching retro in full — retros are narrative, skimming loses the thread), or
+   - a consequential decision has nothing to go on from tiers 1–4.
+
+   There is no semantic index for these; search by the task's key terms, synonyms and component names, trying a few variants:
+   ```
+   grep -rli '<keyword>' <memory>/learnings/ <memory>/retro/
+   ```
+6. Read the full content of every file you rely on — don't act on a filename, index row or grep snippet alone.
+7. **Brief.** Group what you found: binding (rules, precedents), current understanding (active memory), open work (notes), and any reference you opened — each with its source file. If nothing relevant turns up, say so plainly rather than forcing a match.
+8. If you notice a gap — a situation memory doesn't cover — flag it and suggest `typmem-learn` (or `typmem-memory`) once the work produces the answer. Don't write it yourself from here.
 
 ## Don't
 
-- Don't write to any file under `~/.typmem/memory/` — this skill is read-only. Use `typmem-learn`, `typmem-retro`, or `typmem-judge` for writes.
-- Don't treat an empty `reviewer` field on a learning as "not usable yet" — every learning is valid the moment it's captured, judged or not.
-- Don't let a learning override a precedent or rule — flag the conflict instead of quietly picking one.
-- Don't dump raw file contents back at the user as the whole answer — synthesize a brief that actually applies to the task.
+- Don't write any file under `<memory>/` or `<note>/` — this skill is read-only. That includes fixing a stale index; report it instead.
 - Don't skip `rules.md` even for a "quick" task — it's meant to be cheap to check every time.
+- Don't read every learning, retro or note "just in case" — reference is opened on need.
+- Don't treat a note or retro as authority — it says where work stands, not what is true.
+- Don't treat an empty `reviewer` field on a learning as "not usable yet" — every learning is valid the moment it's captured, judged or not.
+- Don't let a lower layer override a higher one — flag the conflict instead of quietly picking one.
+- Don't dump raw file contents back at the user as the whole answer — synthesize a brief that actually applies to the task.
