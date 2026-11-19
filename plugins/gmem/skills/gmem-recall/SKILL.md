@@ -18,21 +18,23 @@ Skip it for trivial, throwaway asks where recall adds nothing (e.g. "format this
 
 ## Where this lives
 
-Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses both keys:
+Resolve the gmem config first, using the rules in `gmem-setup`. This skill reads every
+kind. Each `<kind>` below means `<location.<kind>>/<memory_dir>/<kind>/`:
 
-- `<memory>` = `<location.memory>/<memory_dir>/memory/` (default `<project>/.gmem/memory/`)
-- `<note>` = `<location.note>/<memory_dir>/note/` (default `<project>/.gmem/note/`)
+- `<memory>` and `<note>` (default `<project>/.gmem/memory/` and `<project>/.gmem/note/`)
+- `<rules>`, `<precedents>`, `<learnings>`, `<proposals>`, `<retro>` (default under
+  `~/.gmem/`)
 
-The two can live in different places. If there is no config, use the defaults and carry on; mention once that `gmem-setup` can change where memory and notes are kept. A folder that doesn't exist just means nothing is recorded there yet.
+They can live in different places. If there is no config, use the defaults and carry on; mention once that `gmem-setup` can change where they are kept. A folder that doesn't exist just means nothing is recorded there yet.
 
 ## Authority — weigh what you find accordingly
 
 Read top to bottom: the order you read in is also the order of authority. Tiers 1–4 are checked every time. Each is cheap: one short file, or an index that points at the few files worth opening.
 
 ```
-1. Rule        <memory>/rules/index.md          read index → open matching rows
+1. Rule        <rules>/index.md          read index → open matching rows
                highest — never violate
-2. Precedent   <memory>/precedents/index.md     read index → open matching rows
+2. Precedent   <precedents>/index.md     read index → open matching rows
                align with, unless you have a clear, stated reason not to
 3. Memory      <memory>/active/index.md         read index → open matching rows
                <memory>/active/correction/lessons.md   read whole
@@ -41,21 +43,21 @@ Read top to bottom: the order you read in is also the order of authority. Tiers 
                → read in full the ones touching the task; list the rest by name
                context only — tells you where work stands, not what is true
 ── Reference (open only when needed) ──
-   <memory>/learnings/   advice — useful, but not binding
-   <memory>/retro/, the ledger (<memory>/YYYY-MM-DD_HHMM_*.md), notes with
-   status done, <memory>/proposals/   context only, not authority
+   <learnings>/   advice — useful, but not binding
+   <retro>/, the ledger (<memory>/YYYY-MM-DD_HHMM_*.md), notes with
+   status done, <proposals>/   context only, not authority
 ```
 
 On conflict, the higher layer wins: rules > precedents > active memory > learnings. Notes and retros never override any of them. Mention the conflict — don't silently pick the lower one.
 
 ## How to recall
 
-1. **Rule.** Read `<memory>/rules/index.md` and open every row whose "when to read" touches the task. When unsure whether a rule applies, open it — a missed rule costs more than an extra read.
-2. **Precedent.** Read `<memory>/precedents/index.md` and open every row whose "when to read" touches the task.
+1. **Rule.** Read `<rules>/index.md` and open every row whose "when to read" touches the task. When unsure whether a rule applies, open it — a missed rule costs more than an extra read.
+2. **Precedent.** Read `<precedents>/index.md` and open every row whose "when to read" touches the task.
 
    For both `rules/` and `precedents/`, check the index is complete:
    ```
-   ls <memory>/rules/ <memory>/precedents/
+   ls <rules>/ <precedents>/
    ```
    Any file without a row in its index: read its name (and the file, if the name looks relevant), and tell the user the index is stale so they can add the row. If there is no index but there are files, treat every file as unindexed.
 3. **Memory.** Read `<memory>/active/index.md`, open the rows that touch the task, and read `active/correction/lessons.md` whole. If the index is missing or a topic file isn't in it, fall back to listing `active/correction/` and `active/reference/`.
@@ -72,7 +74,7 @@ On conflict, the higher layer wins: rules > precedents > active memory > learnin
 
    There is no semantic index for these; search by the task's key terms, synonyms and component names, trying a few variants:
    ```
-   grep -rli '<keyword>' <memory>/learnings/ <memory>/retro/
+   grep -rli '<keyword>' <learnings>/ <retro>/
    ```
 6. Read the full content of every file you rely on — don't act on a filename, index row or grep snippet alone.
 7. **Brief.** Group what you found: binding (rules, precedents), current understanding (active memory), open work (notes), and any reference you opened — each with its source file. If nothing relevant turns up, say so plainly rather than forcing a match.
@@ -80,7 +82,7 @@ On conflict, the higher layer wins: rules > precedents > active memory > learnin
 
 ## Don't
 
-- Don't write any file under `<memory>/` or `<note>/` — this skill is read-only. That includes fixing a stale index; report it instead.
+- Don't write any file in any gmem folder — this skill is read-only. That includes fixing a stale index; report it instead.
 - Don't skip `rules/index.md` even for a "quick" task — it's meant to be cheap to check every time.
 - Don't read every learning, retro or note "just in case" — reference is opened on need.
 - Don't treat a note or retro as authority — it says where work stands, not what is true.

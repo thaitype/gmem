@@ -10,10 +10,12 @@ what. What is planted inside each bed is listed in that bed's own `index.md`.
 
 ## Where the garden is
 
-Memory lives in the folder set by `gmem-setup` (default `<project>/.gmem/memory/`), notes
-in its note folder (default `<project>/.gmem/note/`). Use memory on every task — both to
-inform your work and to record what you learn. Don't let hard-won facts evaporate when a
-session ends.
+Each kind of memory has its own folder, set by `gmem-setup`. By default, this
+project's context and status live in the project (`<project>/.gmem/memory/`,
+`<project>/.gmem/note/`), and what carries across projects lives at user level
+(`~/.gmem/rules/`, `precedents/`, `learnings/`, `proposals/`, `retro/`). Use memory on
+every task — both to inform your work and to record what you learn. Don't let hard-won
+facts evaporate when a session ends.
 
 ## Two shapes of memory
 
@@ -58,7 +60,7 @@ conflict the higher layer wins. Notes and `retro/` are context, not authority.
 |---|---|
 | `gmem-judge` | Periodically tidy the learnings: revise rough ones in place, raise proposals in `proposals/` for facts worth promoting to precedents or rules. Non-blocking — learnings stay valid regardless. |
 | `gmem-tidy` | Now and then, audit memory against the rules for each layer and the real code, decide fixes with the user, then apply them. |
-| `gmem-setup` | Choose or inspect where memory and notes are kept. |
+| `gmem-setup` | Choose or inspect where each kind of memory is kept. |
 
 Promoting to a precedent or rule is a human step: add the file to `precedents/` or
 `rules/<topic>.md`, and its row to that folder's `index.md` (one row per file: file →

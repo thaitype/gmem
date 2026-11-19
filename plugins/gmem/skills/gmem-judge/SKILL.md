@@ -10,10 +10,11 @@ Act as the AI judge over captured learnings. Your job is to keep the `learnings/
 
 ## Where this lives
 
-Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
-`location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`;
-with the defaults that is `<project>/.gmem/memory/`. If there is no config, use the
-defaults and carry on; mention once that `gmem-setup` can change where memory is kept.
+Resolve the gmem config first, using the rules in `gmem-setup`. This skill writes
+`<learnings>` and `<proposals>`, and reads `<rules>` and `<precedents>`. Each is
+`<location.<kind>>/<memory_dir>/<kind>/`; by default all four are under `~/.gmem/`.
+If there is no config, use the defaults and carry on; mention once
+that `gmem-setup` can change where these are kept.
 
 ## Where this sits
 
@@ -25,7 +26,7 @@ precedents/   created by a human acting on a proposal — not by you
 rules/        created by a human acting on a proposal — not by you
 ```
 
-You operate over `<memory>/learnings/` and write only to `<memory>/learnings/` (revisions) and `<memory>/proposals/` (proposals). You never write `precedents/` or `rules/`, and you never touch `retro/`.
+You operate over `<learnings>/` and write only to `<learnings>/` (revisions) and `<proposals>/` (proposals). You never write `precedents/` or `rules/`, and you never touch `retro/`.
 
 ## The `reviewer` field = "already judged"
 
@@ -66,10 +67,10 @@ In every case the learning stays valid and usable. A proposal is advice, not a g
 
 ## How to run
 
-1. Ensure dirs exist: `mkdir -p <memory>/proposals`
+1. Ensure dirs exist: `mkdir -p <proposals>`
 2. Find unjudged learnings (empty `reviewer`):
    ```
-   grep -rLE '^reviewer:[[:space:]]*\S' <memory>/learnings/
+   grep -rLE '^reviewer:[[:space:]]*\S' <learnings>/
    ```
 3. Load context for dedup / conflict / promotion checks: the other learnings, `rules/`, and `precedents/` (for each, start from its `index.md`, then open the files that bear on the learnings at hand; also read any file the index doesn't list).
 4. For each learning: apply the rubric, pick an outcome, act (revise the file, and/or write a proposal), then set its `reviewer`.
@@ -80,7 +81,7 @@ A run only touches empty-`reviewer` learnings, so re-running skips everything al
 
 ## Proposal file
 
-- Location: `<memory>/proposals/`
+- Location: `<proposals>/`
 - Filename: `<slug>.md` — a short kebab-case label of the proposed action (e.g. `promote-aca-sidecar-constraint`, `resolve-conflict-retry-policy`). No date prefix.
 - Frontmatter (MVP): `author` (your judge identity), `created`.
 - Body: which learning(s) it concerns (paths), the recommended action (promote-to-precedent / promote-to-rule / resolve-conflict-with `<higher entry>` / review-for-removal), and a one-paragraph rationale — enough for a human to decide fast.

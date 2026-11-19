@@ -10,9 +10,9 @@ Write the diary entry for a chunk of work. A retro is the story of *what happene
 ## Where this lives
 
 Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
-`location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`;
-with the defaults that is `<project>/.gmem/memory/`. If there is no config, use the
-defaults and carry on; mention once that `gmem-setup` can change where memory is kept.
+`retro` key. `<retro>` below means `<location.retro>/<memory_dir>/retro/` (default
+`~/.gmem/retro/`). If there is no config, use the defaults and carry on; mention once
+that `gmem-setup` can change where these are kept.
 
 ## Retro vs learning — read this first
 
@@ -40,9 +40,9 @@ Guidance, not a rigid template (the body format is intentionally loose for now �
 ## How to write it
 
 1. Resolve today's date in local time as `YYYY-MM-DD`.
-2. Make sure the directory exists: `mkdir -p <memory>/retro`
+2. Make sure the directory exists: `mkdir -p <retro>`
 3. Build a short slug describing what this session was about: lowercase kebab-case, 2–5 words, hyphen-separated, no spaces (e.g. `aca-tailscale-sidecar`, `resh-rhai-parser`).
-4. Target file: `<memory>/retro/YYYY-MM-DD-<slug>.md` (date prefix + slug — retro is the only memory layer that uses a date in the filename). Each session/topic gets its own file.
+4. Target file: `<retro>/YYYY-MM-DD-<slug>.md` (date prefix + slug — retro is the only memory layer that uses a date in the filename). Each session/topic gets its own file.
 5. Create the file with this frontmatter, then the diary body:
    ```
    ---
@@ -56,7 +56,7 @@ Guidance, not a rigid template (the body format is intentionally loose for now �
 
 ## File rules
 
-- Location: `<memory>/retro/`
+- Location: `<retro>/`
 - Filename: `YYYY-MM-DD-<slug>.md` (one file per session/topic; slug is a short lowercase kebab-case descriptor)
 - Frontmatter (MVP): `author`, `created`. No `reviewer` — retro is never reviewed.
 - Body: free-form diary, no fixed template yet.

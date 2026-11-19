@@ -16,23 +16,22 @@ Resolve the gmem config first, using the rules in `gmem-setup`. If there is no
 config, offer to run the `gmem-setup` interview before going further — where memory
 should end up is the first decision of a migration. Then:
 
-- `<memory>` = `<location.memory>/<memory_dir>/memory/`
-- `<note>` = `<location.note>/<memory_dir>/note/`
+Each `<kind>` below means `<location.<kind>>/<memory_dir>/<kind>/`. By default `<memory>`
+and `<note>` are in the project, and the other five are under `~/.gmem/`.
 
 ```
 <memory>/
-├── rules/          index.md + <topic>.md
-├── precedents/     index.md + <slug>.md
-├── learnings/      <slug>.md
-├── proposals/      <slug>.md
-├── retro/          YYYY-MM-DD-<slug>.md
 ├── active/
 │   ├── index.md    one table per category: file → when to read it
 │   ├── correction/ <topic>.md, lessons.md
 │   └── reference/  <topic>.md
 └── YYYY-MM-DD_HHMM_<topic>.md     ledger
-<note>/
-└── YYYY-MM-DD_HHMM_<topic>.md     frontmatter `status: in-progress | blocked | done`
+<note>/             YYYY-MM-DD_HHMM_<topic>.md   frontmatter `status: in-progress | blocked | done`
+<rules>/            index.md + <topic>.md
+<precedents>/       index.md + <slug>.md
+<learnings>/        <slug>.md
+<proposals>/        <slug>.md
+<retro>/            YYYY-MM-DD-<slug>.md
 ```
 
 Every `index.md` row is `| <file> | <when to read it> |`.
@@ -46,9 +45,8 @@ names.
 
 | Old | Detect | Migrate to |
 |---|---|---|
-| typmem folders | `.typmem/memory/` or `.typmem/note/` under the project, `~/`, or a custom location from the config | Move into the matching `.gmem/` folder |
-| Fixed `~/.typmem/memory/` (before configurable locations) | the folder exists and `<memory>` resolves somewhere else | Ask: move its contents into `<memory>`, or into `~/.gmem/memory/` and set `memory = "${USER}"` in the config |
-| `<memory>/rules.md` | the file exists | Split by topic into `rules/<topic>.md` (propose the split; the user confirms — rules are human-owned) and write `rules/index.md` |
+| typmem folders | `.typmem/memory/` or `.typmem/note/` under the project, `~/`, or a custom location | Split by kind: `rules.md`, `precedents/`, `learnings/`, `proposals/`, `retro/` go to `<rules>`, `<precedents>`, `<learnings>`, `<proposals>`, `<retro>`; ledger entries and `active/` go to `<memory>`; notes go to `<note>` |
+| Old `rules.md` (any of the above) | the file exists | Split by topic into `<rules>/<topic>.md` (propose the split; the user confirms — rules are human-owned) and write `<rules>/index.md` |
 | `precedents/` without an index | no `precedents/index.md`, or files missing from it | Write the missing rows; draft each "when to read" from the file, user confirms |
 | Old skill names | `typmem-*`, `typ-wait-listen-me`, `typ-wrap-up-memory` in `CLAUDE.md` / `AGENTS.md` | Rename to `gmem-*`; `typ-wait-listen-me` → `gmem-stop`, `typ-wrap-up-memory` → `gmem-bye` |
 | Old CLAUDE.md block | a long `## Memory (typmem)` or `## Memory (gmem)` section (memory shapes, authority, skill list, rhythm) instead of the short pointer to `gmem-map` in the current README | Show the diff; replace the section with the pointer only if the user agrees. Anything in it that isn't in `gmem-map` (a project-specific addition), point out and keep |
@@ -73,8 +71,13 @@ there.
 
 1. **Resolve** the target as above and print it:
    ```
-   memory -> /path/.gmem/memory
-   note   -> /path/.gmem/note
+   memory     -> /path/to/project/.gmem/memory
+   note       -> /path/to/project/.gmem/note
+   rules      -> /Users/you/.gmem/rules
+   precedents -> /Users/you/.gmem/precedents
+   learnings  -> /Users/you/.gmem/learnings
+   proposals  -> /Users/you/.gmem/proposals
+   retro      -> /Users/you/.gmem/retro
    ```
 2. **Scan** every source in the tables. Skip anything already in the target layout, so
    running twice is safe. If nothing needs migrating, say so and stop.
@@ -95,9 +98,9 @@ there.
    what moved where, which decisions the user made, and (in git) the pre-migration
    commit to recover anything from (`git show <sha>:<path>`).
 7. **Verify** and report:
-   - every file in `rules/`, `precedents/` and `active/` has a row in its `index.md`,
+   - every file in `<rules>`, `<precedents>` and `<memory>/active/` has a row in its `index.md`,
      and every row points at a file that exists;
-   - every link inside `<memory>` resolves (ledger, retros and notes may keep old links —
+   - every link inside the target folders resolves (ledger, retros and notes may keep old links —
      report them, don't fix them);
    - every note has a valid `status`.
    Then suggest running `gmem-tidy` to check content now that the layout is right.

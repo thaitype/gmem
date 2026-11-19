@@ -5,14 +5,16 @@ description: Saves one durable, timeless fact that was learned from the work its
 
 # gmem-learn
 
-Capture one durable fact as a recipe card under `<memory>/learnings/`. A learning is *what you now know about the world* — useful to anyone, indefinitely, even someone who never saw the painful session that produced it. A learning is **valid and usable the moment you capture it** — it does not wait for any review. `gmem-judge` later tidies learnings and may propose that the strongest ones be promoted to `precedents/` or `rules/`, but that is optional and non-blocking.
+Capture one durable fact as a recipe card under `<learnings>/`. A learning is *what you now know about the world* — useful to anyone, indefinitely, even someone who never saw the painful session that produced it. A learning is **valid and usable the moment you capture it** — it does not wait for any review. `gmem-judge` later tidies learnings and may propose that the strongest ones be promoted to `precedents/` or `rules/`, but that is optional and non-blocking.
 
 ## Where this lives
 
 Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
-`location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`;
-with the defaults that is `<project>/.gmem/memory/`. If there is no config, use the
-defaults and carry on; mention once that `gmem-setup` can change where memory is kept.
+`learnings` key, and `retro` when extracting from a retro. `<learnings>` below means
+`<location.learnings>/<memory_dir>/learnings/` (default `~/.gmem/learnings/`) and
+`<retro>` means `<location.retro>/<memory_dir>/retro/` (default `~/.gmem/retro/`).
+If there is no config, use the defaults and carry on; mention once
+that `gmem-setup` can change where these are kept.
 
 ## Learning vs retro — read this first
 
@@ -39,14 +41,14 @@ Example of the move — turn a diary sentence into a recipe card:
 ## Two ways to use this
 
 - **Direct capture (default).** You (or the user) have a fact in mind right now → write one learning file.
-- **Extract from a retro.** Point at a retro file (or the latest one in `<memory>/retro/`) → read it, pull out each durable fact, and write one learning file per fact. Distil — do not copy the narrative across.
+- **Extract from a retro.** Point at a retro file (or the latest one in `<retro>/`) → read it, pull out each durable fact, and write one learning file per fact. Distil — do not copy the narrative across.
 
 ## How to write it
 
-1. Make sure the directory exists: `mkdir -p <memory>/learnings`
+1. Make sure the directory exists: `mkdir -p <learnings>`
 2. Distil the fact and run the test above. If it fails (it only matters for this session), stop — it belongs in `gmem-retro`, not here.
 3. Build a slug from the **fact itself** (not the session): lowercase kebab-case, 2–6 words, no spaces (e.g. `iii-engine-no-prebuilt-binary`, `aca-sidecar-no-host-network`).
-4. Target file: `<memory>/learnings/<slug>.md` — no date prefix. Learnings are timeless; only retro carries a date in the filename.
+4. Target file: `<learnings>/<slug>.md` — no date prefix. Learnings are timeless; only retro carries a date in the filename.
 5. Write this frontmatter, then the body:
    ```
    ---
@@ -63,7 +65,7 @@ When extracting from a retro, repeat steps 2–7 once per durable fact you find.
 
 ## File rules
 
-- Location: `<memory>/learnings/`
+- Location: `<learnings>/`
 - Filename: `<slug>.md` — no date prefix (timeless fact)
 - Frontmatter (MVP): `author`, `reviewer` (empty — `gmem-judge` fills it once it has looked), `created`
 - One fact per file

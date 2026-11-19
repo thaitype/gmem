@@ -7,10 +7,11 @@ description: Audits all of gmem memory against its layout rules — rules, prece
 
 ## Where this lives
 
-Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
-`location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`;
-with the defaults that is `<project>/.gmem/memory/`. If there is no config, use the
-defaults and carry on; mention once that `gmem-setup` can change where memory is kept.
+Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses every
+kind. `<memory>`, `<rules>`, `<precedents>`, `<learnings>` and `<proposals>` below each
+mean `<location.<kind>>/<memory_dir>/<kind>/`. By default `<memory>` is
+`<project>/.gmem/memory/` and the other four are under `~/.gmem/`. If there is no config, use the defaults and carry on; mention once
+that `gmem-setup` can change where these are kept.
 
 ## 1. Ask scope
 
@@ -86,9 +87,9 @@ them to fix links.
 With scope and approach chosen, work through the decisions with the user, carrying the rules above as context. Act
 only after the user confirms the shared understanding. When applying:
 
-1. `git mv` files you are moving (when memory is in a git repo), so history follows them; then edit.
+1. `git mv` files you are moving (when source and target are in the same git repo), so history follows them; then edit.
 2. Write one ledger entry `<memory>/YYYY-MM-DD_HHMM_memory-tidy.md`: what moved where, what was removed and why, and
    the pre-tidy commit to recover anything from (`git show <sha>:<path>`). Do not copy removed content into it.
 3. Rewrite `active/index.md`: both categories, every file, a "when to read" column. Fix the `rules/index.md` and
    `precedents/index.md` rows the user confirmed.
-4. Check that every link inside `active/`, `rules/` and `precedents/` resolves, then commit if memory is in a git repo.
+4. Check that every link inside `active/`, `rules/` and `precedents/` resolves, then commit each folder that is in a git repo.
