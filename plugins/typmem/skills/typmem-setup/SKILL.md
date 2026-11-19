@@ -24,9 +24,10 @@ note   = "${USER}"          # where `typmem-note` entries live
 - A location can also be a **custom path** instead of one of those two: an absolute
   path (`/data/typmem`), a home path (`~/work/typmem`), a path built on a variable
   (`${PROJECT}/docs`), or a relative path (resolved against `${PROJECT}`).
-- A kind's folder is `<base>/<memory_dir>`, where `<base>` is the location value. With the
-  example above: memory is in `<project>/.typmem`, notes are in `~/.typmem`. With
-  `note = "/data/typmem"`, notes are in `/data/typmem/.typmem`.
+- A kind's folder is `<base>/<memory_dir>/<kind>/`, where `<base>` is the location value
+  and `<kind>` is `memory` or `note`. With the example above: memory is in
+  `<project>/.typmem/memory/`, notes are in `~/.typmem/note/`. With
+  `note = "/data/typmem"`, notes are in `/data/typmem/.typmem/note/`.
 
 Defaults when a key is missing: `memory_dir = ".typmem"`, `memory = "${PROJECT}"`,
 `note = "${PROJECT}"`.
@@ -85,8 +86,8 @@ Before writing:
 After writing, print the resolved folders, for example:
 
 ```
-memory -> /path/to/project/.typmem
-note   -> /Users/you/.typmem
+memory -> /path/to/project/.typmem/memory
+note   -> /Users/you/.typmem/note
 config -> /path/to/project/.typmem/typmem-config.toml
 ```
 
