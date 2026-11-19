@@ -168,6 +168,19 @@ Everything is plain Markdown. The project's memory and notes are under the proje
 the other user-level kinds are under `~/.gmem/`, so they are not in the project's git
 history.
 
+## Examples
+
+Quick start sets up gmem in one project. Two examples show larger layouts:
+
+- [Home repo](examples/home-repo/): one home, many repos. One agent, one memory, used
+  across several code repositories. Based on
+  [The Home Repo Pattern](https://www.aihero.dev/the-home-repo-pattern).
+- [Dedicated agents](examples/dedicated-agents/): one agent, one home. Each agent keeps
+  its own memory; rules and precedents are shared. The agents work outside their homes,
+  so run them under tight security controls.
+
+See [examples/](examples/) to compare them.
+
 ## Memory lifecycle
 
 ![The six stages of the memory lifecycle: capture, use, review, promote, prune, and retire](docs/assets/memory-lifecycle.webp)
