@@ -21,11 +21,27 @@ it so the paths stay clear.
 A garden like this needs some work from you. In return, every memory can be read,
 checked with `git diff`, and traced to the person who put it there.
 
-install skills
+## Install
+
+### Claude Code (plugin)
+
+Add the marketplace, then install the plugin:
+
+```
+/plugin marketplace add thaitype/gmem
+/plugin install gmem@gmem
+```
+
+`gmem` has the memory skills and the session-start hook.
+
+### Other agents
 
 ```
 npx skills@latest add thaitype/gmem
 ```
+
+This installs the skills only, without the hook. See
+[Opening the map at session start](#opening-the-map-at-session-start).
 
 ## Where memory is stored
 
@@ -42,7 +58,15 @@ manual-only skill that moves memory from older versions (`.typmem/` folders,
 index) or from a crew-style `locker/` layout into the current one. It
 shows a dry-run plan first, asks before every judgment call, and never deletes files.
 
-## Place this in CLAUDE.md
+## Opening the map at session start
+
+Installed as a Claude Code plugin, gmem has a `SessionStart` hook that tells the agent
+to open `gmem-map` before its first task. It speaks up only in projects that use gmem:
+a `gmem-config.toml` or `.gmem/` folder at the repository root, or a user-level
+`~/.gmem/gmem-config.toml`.
+
+If you installed the skills without the plugin (`npx skills add`), there is no hook.
+Place this in CLAUDE.md instead:
 
 ```md
 ## Memory (gmem)
