@@ -1,5 +1,7 @@
 # gmem
 
+![gmem, your agent's memory garden: grow, navigate, and maintain memory in plain Markdown](docs/assets/memory-cover.webp)
+
 Most agent memory works like a recorder: it saves everything automatically and
 finds things again with semantic search, usually a vector index. You don't see
 what was kept, and you can't easily tell why one memory came back and another
@@ -153,6 +155,8 @@ the other user-level kinds are under `~/.gmem/`, so they are not in the project'
 history.
 
 ## Memory lifecycle
+
+![The six stages of the memory lifecycle: capture, use, review, promote, prune, and retire](docs/assets/memory-lifecycle.webp)
 
 The agent writes most of the memory. You decide what stays, what gets promoted, and
 what goes. This section describes each stage and what you do in it.
