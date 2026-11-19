@@ -1,12 +1,12 @@
 ---
 name: typmem-note
-description: Write or update a short status note for the current project/topic in this crew's own home, so a different crew or a fresh session can pick up quickly without re-explaining. Answers "what's true right now" — a different question than typmem-retro's "what happened / what did I learn". On-demand only. Use when the user asks to save/record the current status, or says something like "note this down for next time", "leave a status note", or "typmem-note".
+description: Write or update a short status note for the current project/topic in the configured note location, so another agent or a fresh session can pick up quickly without re-explaining. Answers "what's true right now" — a different question than typmem-retro's "what happened / what did I learn". On-demand only. Use when the user asks to save/record the current status, or says something like "note this down for next time", "leave a status note", or "typmem-note".
 ---
 
 # typmem-note
 
-A short, current-state record of a project/topic, written into the crew's own home so
-whoever opens it next — a different crew, or this same crew in a future session — can
+A short, current-state record of a project/topic, written to the note location so
+whoever opens it next — another agent, or a later session — can
 pick up without asking "where did we leave off?"
 
 `typmem-retro` and this skill answer different questions. Retro asks "what happened /

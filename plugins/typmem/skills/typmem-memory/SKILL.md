@@ -1,11 +1,11 @@
 ---
 name: typmem-memory
-description: Manage this crew's own durable facts — things worth remembering across many future sessions/projects, but too crew-specific to be worth promoting to the fleet-wide typmem-learn. Use when the user wants to record, update, or review a lasting fact about how this crew's own environment/stack/tools work, or asks to "remember this for this crew", "add to crew memory", or "typmem-memory".
+description: Maintain a curated, editable knowledge base of current understanding — corrections to past mistakes and reference notes on how things work — organized by topic with an index, plus an optional dated ledger. Use when the user wants to record, update, or review that understanding, or asks to "add to memory", "update memory", or "typmem-memory". For a single atomic fact captured as-is, use typmem-learn instead.
 ---
 
 # typmem-memory
 
-This is a loose set of conventions for managing durable, crew-local knowledge — not a
+This is a loose set of conventions for managing durable knowledge — not a
 strict procedure. Use judgment throughout; the goal is to keep useful facts easy to find
 later, not to follow a rigid checklist.
 
@@ -24,13 +24,13 @@ Create folders only when something is first written into them.
 
 ## What belongs here vs elsewhere
 
-- **Generalizes beyond this one crew?** → that's `typmem-learn`'s job (fleet-wide),
+- **A single atomic, timeless fact to capture as-is?** → that's `typmem-learn`'s job,
   not this one.
 - **Just the current status of one project/topic, no lasting "fact" to it?** → that's
   `typmem-note`'s job.
-- **A durable fact specific to this crew** (a quirk of its own sandbox, its own stack
-  choices, a gotcha only this crew would hit again) that doesn't generalize enough to
-  be worth promoting fleet-wide → that's what lives here.
+- **Understanding you maintain over time** — a correction to something you got wrong, or
+  a reference on how something works — that you'd revise in place as it changes
+  → that's what lives here.
 
 ## Two locations, two different jobs
 
@@ -61,7 +61,8 @@ believed, that's what the ledger is for (write a dated entry there before changi
 
 ## Rules
 
-- NEVER treat this as a place for fleet-wide facts — those go through `typmem-learn`.
+- NEVER use this for a one-off atomic fact to capture as-is — that goes through
+  `typmem-learn`.
 - NEVER treat this as a project status board — that's `typmem-note`.
 - NEVER force a ledger entry for every `active/` change — best-effort only.
 - NEVER build an archive/inactive-flag mechanism for retired facts — just edit or remove
