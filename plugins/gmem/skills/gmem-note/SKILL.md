@@ -23,9 +23,9 @@ list/summarize function here.
 Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
 `location.note` key.
 
-- Directory: `<location.note>/<memory_dir>/note/`, called `<note>` below. With the
-  defaults that is `<project>/.gmem/note/`. If there is no config, use the defaults and
-  carry on; mention once that `gmem-setup` can change where notes are kept.
+- Directory: `<location.note>/<memory_dir>/note/`, called `<note>` below. Only if
+  no config file exists, use the default: `~/.gmem/note/` (Central memory). Mention
+  once that `gmem-setup` can change where notes are kept.
 - Filename: `YYYY-MM-DD_HHMM_<topic>.md` — the timestamp is from when the note was
   **first created** for this topic. It does not change on later updates.
 

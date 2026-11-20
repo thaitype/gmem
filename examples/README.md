@@ -7,13 +7,14 @@ made-up company, `acme`) and is docs, config and sample memory only.
   that points at several code repositories. One memory covers all of them. Based on
   [The Home Repo Pattern](https://www.aihero.dev/the-home-repo-pattern) on AI Hero.
 - **[Dedicated agents](dedicated-agents/): one agent, one home.** Each agent has its own
-  folder, identity and memory. Rules and precedents are shared.
+  folder, identity, memory and notes. Rules, precedents and learnings are shared in `~/.gmem`.
 
 | | Home repo | Dedicated agents |
 |---|---|---|
 | Who remembers what | One agent remembers the whole system | Each agent remembers what its role needs |
-| Where memory lives | The home repo's `.gmem/` | Each agent's own `.gmem/`; rules and precedents in a shared folder |
-| Rules and precedents | In `~/.gmem` by default | In `shared/`, set per agent in `gmem-config.toml` |
+| Install mode | Home Repo Pattern memory | Dedicated agents memory |
+| Where memory lives | The home repo's `.gmem/`, all seven kinds | Each agent's own `.gmem/` holds `memory` and `note`; the other five kinds are in `~/.gmem` |
+| Rules and precedents | In the home repo's `.gmem/` | In `~/.gmem`, set once in `~/.gmem/gmem-config.toml` |
 | Work across repos | Notes track a change that spans repos | A hand-off note names the owner |
 | Where the agent works | Inside its home (repos are cloned into `workspace/`) | Outside its home, so it needs access beyond one project; run it under tight security controls |
 | Main benefit | One place for instructions, skills and memory | Memory stays separate for each agent |

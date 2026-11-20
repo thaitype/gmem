@@ -52,7 +52,8 @@ for anything beyond `validate`.
 
 Resolve the gmem config, using the rules in `gmem-setup`. Group the seven kinds by the
 `.gmem/` folder they resolve into, which is `<location.<kind>>/<memory_dir>/`. With the
-recommended setup there are two:
+default (Central memory) setup there is one, `~/.gmem/`. With the Dedicated agents
+preset there are two:
 
 ```
 <project>/.gmem/   memory, note

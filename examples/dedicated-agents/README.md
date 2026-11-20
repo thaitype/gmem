@@ -1,7 +1,12 @@
 # Dedicated agents: one agent, one home
 
-Each agent has its own home folder, its own identity (`AGENTS.md`, `SOUL.md`) and its
-own gmem memory. What humans decide, the rules and precedents, is shared by all of them.
+This folder stands for your home directory `~`. The `.gmem/` folder here is
+`~/.gmem`, and each agent's home is a folder inside it: `~/team-leader` and `~/builder`.
+
+This example is the **Dedicated agents memory** install mode (mode 3) of
+[`gmem-setup`](../../plugins/gmem/skills/gmem-setup/SKILL.md). Each agent has its own
+identity (`AGENTS.md`, `SOUL.md`) and its own context and status. What is learned and
+decided is kept in one place, `~/.gmem`, for all of them.
 
 In this example Acme has two agents:
 
@@ -9,13 +14,38 @@ In this example Acme has two agents:
   remembers priorities and decisions.
 - [`builder`](builder/): writes code and tests. It remembers technical gotchas.
 
+## Memory split
+
+```
+~/.gmem/                              config, and what is learned and decided
+  gmem-config.toml                    the mode 3 preset
+  rules/            decided by a human, read by every agent
+  precedents/       decided by a human, read by every agent
+  learnings/ proposals/ retro/        written by every agent (created on first save)
+
+~/team-leader/.gmem/                  ~/builder/.gmem/
+  memory/  priorities, decisions        memory/  technical gotchas
+  note/    assignments                  note/    status of owned work
+```
+
+The config is [`.gmem/gmem-config.toml`](.gmem/gmem-config.toml), at user level, so every
+agent home uses it. It keeps `memory` and `note` in the agent's own home (`${PROJECT}`)
+and the other five kinds in `~/.gmem` (`${USER}`). gmem reads
+`rules > precedents > active memory > learnings`, so a rule beats anything an agent
+remembers.
+
+Only humans edit `rules/` and `precedents/`. Agents read them through `gmem-recall`.
+
 ## Compared with the home repo
 
 | | [Home repo](../home-repo/) | Dedicated agents |
 |---|---|---|
+| Install mode | Home Repo Pattern memory (mode 2) | Dedicated agents memory (mode 3) |
 | Agents | One | Several, each with a role |
 | Identity | One `AGENTS.md` | One `AGENTS.md` and `SOUL.md` per agent |
-| Memory | One, shared across repos | One per agent, plus shared rules |
+| Memory and notes | One, shared across repos | One per agent |
+| Rules, precedents, learnings, proposals, retro | In the home repo | In `~/.gmem`, shared by all agents |
+| Config location | Project level | User level (`~/.gmem/gmem-config.toml`) |
 | Hand-off | Not needed | Through notes that name an owner |
 
 ## When to use it
@@ -24,61 +54,27 @@ In this example Acme has two agents:
 - You want each agent to remember only what its role needs, so its memory stays small.
 - You want the human-decided rules to stay identical for every agent.
 
-## Trade-off: agents work outside their home
+## Trade-offs
 
-An agent's home holds its identity and memory, not the code. To do real work, the agent
-reads and writes outside its own home: in the code repositories, and in `shared/`. Your
-tools then have to let the agent reach folders outside the project it was opened in.
+**Learnings, proposals and retro from every agent land in one pool in `~/.gmem`.** That
+is fine for one person on their own machine. If you want per-agent learnings, use the
+Custom mode and point those kinds at each agent's home.
 
-- **Cost:** the agent's access is wider than one project, so run this pattern where
-  security is tightly controlled. Sandbox the agents, and allow each one only the paths
-  its role needs. For example, `builder` gets the code repositories, and every agent gets
-  `shared/` as read-only.
-- **Benefit:** each agent's memory stays separate. The builder's gotchas never mix with
+**Agents work outside their home.** An agent's home holds its identity, context and
+status, not the code. To do real work, the agent reads and writes outside its own home:
+in the code repositories and in `~/.gmem`. Your tools then have to let it reach folders
+outside the project it was opened in.
+
+- **Cost:** the access is wider than one project, so run this pattern where security is
+  tightly controlled. Sandbox the agents and allow each one only the paths its role
+  needs. Every agent may read `~/.gmem` and write only `learnings/`, `proposals/` and
+  `retro/` there. `builder` also gets the code repositories.
+- **Benefit:** each agent's context stays separate. The builder's gotchas never mix with
   the team leader's decisions, and you can review, prune or reset one agent without
   touching the others.
 
 If one agent is enough, use the home repo pattern. You can also combine them: each
 dedicated agent can have child repos under its own `workspace/`.
-
-## Memory split
-
-```
-shared/.gmem/
-  rules/            decided by a human, read by every agent
-  precedents/       decided by a human, read by every agent
-
-team-leader/.gmem/                    builder/.gmem/
-  memory/  priorities, decisions        memory/  technical gotchas
-  note/    assignments                  note/    status of owned work
-  learnings/ proposals/ retro/          learnings/ proposals/ retro/
-```
-
-Each agent's [`gmem-config.toml`](builder/.gmem/gmem-config.toml) keeps `memory`,
-`note`, `learnings`, `proposals` and `retro` in its own home with `${PROJECT}`, and
-points `rules` and `precedents` at `../shared`. gmem reads `rules > precedents >
-active memory > learnings`, so a shared rule beats anything an agent remembers.
-
-## Sharing rules and precedents
-
-`../shared` is a relative path, and gmem resolves a relative path against the project
-root. The project root is the Git root, or the current directory if the folder is not a
-Git repo. So this works when each agent home is its own Git repository (or plain
-folder) and `shared` sits beside it:
-
-```
-agents/
-  shared/           its own repo; rules and precedents live in shared/.gmem/
-  team-leader/      its own repo
-  builder/          its own repo
-```
-
-If your agent homes sit inside one larger Git repository, the project root is that
-repository's root, and `../shared` points outside it. In that case set `rules` and
-`precedents` to `${PROJECT}/agents/shared` (or another path built from the root), or
-to `${USER}` to share through `~/.gmem` on one machine.
-
-Only humans edit `shared/`. Agents read it through `gmem-recall` and never write to it.
 
 ## Hand-off
 
@@ -90,7 +86,11 @@ Each agent keeps its own note current. Neither edits the other's.
 
 ## Try it
 
-1. Copy `shared`, `team-leader` and `builder` side by side, and run `git init` in each.
-2. Install the gmem plugin (see the [root README](../../README.md#install)).
-3. Open Claude Code in `builder/` and ask: "Run gmem-recall and list the files you
-   read." It should list its own memory and the shared rule and precedent.
+1. Install the gmem plugin (see the [root README](../../README.md#install)).
+2. Copy `team-leader` and `builder` into your home directory (or anywhere you like).
+3. Copy `.gmem` to `~/.gmem`.
+
+   **Warning:** if `~/.gmem` already exists, back it up or merge by hand. Never
+   overwrite it, because it may hold your own memory and config.
+4. Open Claude Code in `~/builder` and ask: "Run gmem-recall and list the files you
+   read." It should list its own memory and the rule and precedent in `~/.gmem`.

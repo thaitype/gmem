@@ -12,8 +12,8 @@ Act as the AI judge over captured learnings. Your job is to keep the `learnings/
 
 Resolve the gmem config first, using the rules in `gmem-setup`. This skill writes
 `<learnings>` and `<proposals>`, and reads `<rules>` and `<precedents>`. Each is
-`<location.<kind>>/<memory_dir>/<kind>/`; by default all four are under `~/.gmem/`.
-If there is no config, use the defaults and carry on; mention once
+`<location.<kind>>/<memory_dir>/<kind>/`. Only if no config file exists, use the
+default: all four under `~/.gmem/<kind>/` (Central memory). Mention once
 that `gmem-setup` can change where these are kept.
 
 ## Where this sits

@@ -11,9 +11,9 @@ Capture one durable fact as a recipe card under `<learnings>/`. A learning is *w
 
 Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
 `learnings` key, and `retro` when extracting from a retro. `<learnings>` below means
-`<location.learnings>/<memory_dir>/learnings/` (default `~/.gmem/learnings/`) and
-`<retro>` means `<location.retro>/<memory_dir>/retro/` (default `~/.gmem/retro/`).
-If there is no config, use the defaults and carry on; mention once
+`<location.learnings>/<memory_dir>/learnings/` and `<retro>` means
+`<location.retro>/<memory_dir>/retro/`. Only if no config file exists, use the
+defaults: `~/.gmem/learnings/` and `~/.gmem/retro/` (Central memory). Mention once
 that `gmem-setup` can change where these are kept.
 
 ## Learning vs retro — read this first

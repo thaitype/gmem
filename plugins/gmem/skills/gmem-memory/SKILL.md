@@ -18,8 +18,8 @@ Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses 
 <location.memory>/<memory_dir>/memory/      # called <memory> below
 ```
 
-With the defaults that is `<project>/.gmem/memory/`. If there is no config, use the
-defaults and carry on; mention once that `gmem-setup` can change where memory is kept.
+Only if no config file exists, use the default: `<memory>` is `~/.gmem/memory/`
+(Central memory). Mention once that `gmem-setup` can change where memory is kept.
 Create folders only when something is first written into them.
 
 ## What belongs here vs elsewhere
