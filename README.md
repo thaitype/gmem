@@ -76,7 +76,7 @@ This installs the skills only, without the hook. See
 
 ## Quick start
 
-In this walkthrough, you set up gmem in one project, save how something works and
+In this walkthrough, you set up gmem, save how something works and
 where a piece of work stands, and see the agent pick up both in a fresh session. It
 assumes you installed the Claude Code plugin.
 
@@ -86,24 +86,24 @@ assumes you installed the Claude Code plugin.
    /gmem-setup
    ```
 
-   The agent asks three questions, one at a time. For where the config lives, choose
-   **Project level** (the other option is **User level**, shared by every project), and **Recommended** for where each kind of memory lives. When it
-   finishes, it prints the folders it resolved:
+   The agent asks one question at a time. First, whether you know gmem already (say no
+   and it runs `gmem-ask` to explain the pattern). Then which install mode: choose
+   **Central memory**, the default. Last, where the config file lives: choose **User
+   level**. When it finishes, it prints the folders it resolved:
 
    ```
-   memory     -> /path/to/project/.gmem/memory
-   note       -> /path/to/project/.gmem/note
+   memory     -> /Users/you/.gmem/memory
+   note       -> /Users/you/.gmem/note
    rules      -> /Users/you/.gmem/rules
    precedents -> /Users/you/.gmem/precedents
    learnings  -> /Users/you/.gmem/learnings
    proposals  -> /Users/you/.gmem/proposals
    retro      -> /Users/you/.gmem/retro
-   config     -> /path/to/project/.gmem/gmem-config.toml
+   config     -> /Users/you/.gmem/gmem-config.toml
    ```
 
-   With **Recommended**, this project's context and status stay in the project. What
-   the agent learns and what you decide live in your home directory, so they carry
-   across projects.
+   With **Central memory**, everything lives in one place in your home directory. See
+   [Install modes](#install-modes) for the other three.
 
    Then it asks whether to add typdoc, an optional helper for checking memory format.
    gmem works without it, so keep the default, **No**. You can set it up later with
@@ -115,8 +115,7 @@ assumes you installed the Claude Code plugin.
 2. Start a fresh session with `/clear`.
 
    Claude Code shows **Opening the gmem map** while the hook runs, and the agent loads `gmem-map`
-   before it answers you. The hook fires now because the project has a
-   `.gmem/gmem-config.toml`.
+   before it answers you. The hook fires now because `~/.gmem/gmem-config.toml` exists.
 3. Tell the agent how something in your project works:
 
    ```
@@ -125,8 +124,8 @@ assumes you installed the Claude Code plugin.
    ```
 
    The agent runs `gmem-memory`. It writes a topic file such as
-   `.gmem/memory/active/reference/staging-database.md`, and adds a row for it to
-   `.gmem/memory/active/index.md`:
+   `~/.gmem/memory/active/reference/staging-database.md`, and adds a row for it to
+   `~/.gmem/memory/active/index.md`:
 
    ```md
    | reference/staging-database.md | Before writing test data to staging, or when staging data goes missing |
@@ -142,7 +141,7 @@ assumes you installed the Claude Code plugin.
    ```
 
    The agent runs `gmem-note` and writes a file such as
-   `.gmem/note/2026-11-19_1430_seed-script-fixtures.md`:
+   `~/.gmem/note/2026-11-19_1430_seed-script-fixtures.md`:
 
    ```md
    ---
@@ -172,28 +171,34 @@ assumes you installed the Claude Code plugin.
    retro, or a learning worth writing, and writes only the ones that qualify. If the
    orders table got done in this session, it updates the note.
 
-You now have a project with memory that the agent reads at the start of every
-session. Learnings come later. The agent writes them with `gmem-learn` when it learns
+You now have memory that the agent reads at the start of every session. Learnings come later. The agent writes them with `gmem-learn` when it learns
 something on its own: from your guidance, from a mistake it made, or from something it
 found out while it worked.
 
-Everything is plain Markdown. The project's memory and notes are under the project's
-`.gmem/`. Commit that folder if you want your team to share them. Learnings, rules, and
-the other user-level kinds are under `~/.gmem/`, so they are not in the project's git
-history.
+Everything is plain Markdown. With Central memory, all of it is under `~/.gmem/`, so
+none of it is in a project's git history. If you want memory to travel with a repo in git,
+pick **Home Repo Pattern memory** or **Dedicated agents memory** in `gmem-setup`.
 
 ## Examples
 
-Quick start sets up gmem in one project. Two examples show larger layouts:
+Quick start sets up gmem with the default mode. Two examples show larger layouts:
 
 - [Home repo](examples/home-repo/): one home, many repos. One agent, one memory, used
   across several code repositories. Based on
   [The Home Repo Pattern](https://www.aihero.dev/the-home-repo-pattern).
 - [Dedicated agents](examples/dedicated-agents/): one agent, one home. Each agent keeps
-  its own memory; rules and precedents are shared. The agents work outside their homes,
+  its own memory and notes; rules, precedents and learnings are shared in `~/.gmem`.
+  Matches **Dedicated agents memory** (mode 3). The agents work outside their homes,
   so run them under tight security controls.
 
-See [examples/](examples/) to compare them.
+See [examples/](examples/) to compare them. They match two of the
+[install modes](#install-modes).
+
+## Ask gmem
+
+Not sure how gmem works, or which skill fits? Run `/gmem-ask`. It explains why gmem
+exists, every kind of memory, the lifecycle, which skill to use when, and the install
+modes. It is read-only. `gmem-setup` calls it for you when you say you don't know gmem yet.
 
 ## Memory lifecycle
 
@@ -205,8 +210,7 @@ what goes. This section describes each stage and what you do in it.
 ### Capture: the agent writes, you point
 
 Memory enters in five ways. Each kind has its own skill and its own folder. With the
-recommended setup, `memory/` and `note/` are in the project's `.gmem/`, and the rest are
-in `~/.gmem/`:
+default setup, all of them are under `~/.gmem/`:
 
 | You want to keep                                                 | Skill           | Where it goes                          |
 | ---------------------------------------------------------------- | --------------- | -------------------------------------- |
@@ -261,7 +265,7 @@ learning stays usable whether or not anyone reads its proposal.
 
 ### Promote: only you change rules and precedents
 
-Read `~/.gmem/proposals/` when you have time. For a proposal you agree with, add the
+Read `proposals/` when you have time (`~/.gmem/proposals/` by default). For a proposal you agree with, add the
 file to `precedents/` or to `rules/<topic>.md`, and add its row to that folder's
 `index.md` in the same commit. The proposal already contains the row, so you can copy
 it. The agent never writes to `rules/` or `precedents/`. That limit is what makes the
@@ -310,24 +314,40 @@ note's `status` to `done`, so `gmem-recall` stops reading it.
 
 Each kind of memory has its own location in the gmem config: `memory`, `note`,
 `rules`, `precedents`, `learnings`, `proposals`, and `retro`. Run `gmem-setup` to choose
-them. **Recommended** keeps `memory` and `note` in the project and the other five in
-your home directory. **Custom** asks about each kind on its own.
-
-With no config, gmem uses the recommended split:
+them. With no config, gmem uses **Central memory**: every kind lives in your home
+directory.
 
 ```
-<project>/.gmem/memory/      gmem-memory: ledger and active/
-<project>/.gmem/note/        gmem-note
+~/.gmem/memory/             gmem-memory: ledger and active/
+~/.gmem/note/               gmem-note
 ~/.gmem/rules/
 ~/.gmem/precedents/
-~/.gmem/learnings/           gmem-learn
-~/.gmem/proposals/           gmem-judge
-~/.gmem/retro/               gmem-retro
+~/.gmem/learnings/          gmem-learn
+~/.gmem/proposals/          gmem-judge
+~/.gmem/retro/              gmem-retro
 ```
 
 In the config, `${PROJECT}` stands for the project root and `${USER}` for your home
 directory. For example, `learnings = "${PROJECT}"` keeps learnings in
 `<project>/.gmem/learnings/`.
+
+### Install modes
+
+`gmem-setup` offers four modes. Each is a preset of all seven locations. It also asks where
+the config file lives: user level (`~/.gmem/gmem-config.toml`) or project level
+(`<project>/.gmem/gmem-config.toml`).
+
+| Mode | `memory`, `note` | `rules`, `precedents`, `learnings`, `proposals`, `retro` | Recommended config | Fits |
+|---|---|---|---|---|
+| **Central memory** (default) | `${USER}` | `${USER}` | User level | Newcomers; everything in one place in your home directory |
+| **Home Repo Pattern memory** | `${PROJECT}` | `${PROJECT}` | Project level | Working across many repos from one home repo on your machine; memory and config travel with that repo |
+| **Dedicated agents memory** | `${PROJECT}` | `${USER}` | User level | Each agent or project home keeps its own context and status; what is learned and decided is shared at user level |
+| **Custom** | ask per kind | ask per kind | none | A split the presets don't give |
+
+Central memory shares one `active/` and one note pool across every project, so context
+from different projects can mix. Home Repo Pattern memory is based on
+[The Home Repo Pattern](https://www.aihero.dev/the-home-repo-pattern); see
+[examples/home-repo](examples/home-repo/).
 
 To share rules and precedents with your team, choose **Custom** in `gmem-setup` and
 set `rules` and `precedents` to the project. They then live in the project's `.gmem/`
@@ -354,9 +374,10 @@ The `npx skills@latest add thaitype/gmem` install already includes `gmem-migrate
 ## Opening the map at session start
 
 Installed as a Claude Code plugin, gmem has a `SessionStart` hook that tells the agent
-to open `gmem-map` before its first task. It speaks up only in projects that use gmem:
+to open `gmem-map` before its first task. It speaks up only where gmem is in use:
 a `gmem-config.toml` or `.gmem/` folder at the repository root, or a user-level
-`~/.gmem/gmem-config.toml`.
+`~/.gmem/gmem-config.toml`. With no config at all the hook stays silent, even if Central
+memory already sits in `~/.gmem/`, so run `gmem-setup` to turn it on.
 
 If you installed the skills without the plugin (`npx skills@latest add`), there is no hook.
 Place this in CLAUDE.md instead:

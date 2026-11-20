@@ -1,6 +1,6 @@
 ---
 name: gmem-setup
-description: Sets up or inspects gmem's config, which decides where each kind of memory is stored — memory, notes, rules, precedents, learnings, proposals and retros, each in the project, at user level, or a custom path. Use when the user wants to set up gmem, change where any kind is kept, check which config is in effect, check or install the skills gmem-tidy depends on (grilling, wayfinder), or when another gmem skill finds no config. Not for converting old typmem or crew folders — use gmem-migrate.
+description: Sets up or inspects gmem's config, which decides where each kind of memory is stored — memory, notes, rules, precedents, learnings, proposals and retros, each in the project, at user level, or a custom path. Offers four install modes (Central memory, Home Repo Pattern memory, Dedicated agents memory, Custom) and asks where the config file lives. Use when the user wants to set up gmem, pick an install mode, change where any kind is kept, check which config is in effect, check or install the skills gmem-tidy depends on (grilling, wayfinder), or when another gmem skill finds no config. Not for converting old typmem or crew folders — use gmem-migrate.
 ---
 
 # gmem-setup
@@ -15,8 +15,8 @@ creating one.
 memory_dir = ".gmem"          # folder name under each base; default ".gmem"
 
 [location]
-memory     = "${PROJECT}"     # gmem-memory: ledger and active/
-note       = "${PROJECT}"     # gmem-note
+memory     = "${USER}"        # gmem-memory: ledger and active/
+note       = "${USER}"        # gmem-note
 rules      = "${USER}"
 precedents = "${USER}"
 learnings  = "${USER}"        # gmem-learn
@@ -30,9 +30,10 @@ retro      = "${USER}"        # gmem-retro
   path (`/data/gmem`), a home path (`~/work/gmem`), a path built on a variable
   (`${PROJECT}/docs`), or a relative path (resolved against `${PROJECT}`).
 - A kind's folder is `<base>/<memory_dir>/<kind>/`, where `<base>` is that kind's
-  location value. With the example above: memory is in `<project>/.gmem/memory/`, notes
-  in `<project>/.gmem/note/`, learnings in `~/.gmem/learnings/`, rules in
-  `~/.gmem/rules/`. With `rules = "/data/gmem"`, rules are in `/data/gmem/.gmem/rules/`.
+  location value. With the example above: memory is in `~/.gmem/memory/`, notes
+  in `~/.gmem/note/`, learnings in `~/.gmem/learnings/`, rules in
+  `~/.gmem/rules/`. With `memory = "${PROJECT}"`, memory is in `<project>/.gmem/memory/`.
+  With `rules = "/data/gmem"`, rules are in `/data/gmem/.gmem/rules/`.
 
 Every gmem skill names a kind's folder by the kind in angle brackets: `<memory>`,
 `<note>`, `<rules>`, `<precedents>`, `<learnings>`, `<proposals>`, `<retro>`.
@@ -52,13 +53,14 @@ Every gmem skill names a kind's folder by the kind in angle brackets: `<memory>`
 
 ### Defaults
 
-The defaults are the **recommended** split. A key missing from the config takes its
-default; with no config at all, every key does.
+A key missing from the config takes its default; with no config at all, every key does.
+The default is **Central memory**: all seven kinds at `${USER}`, so everything lives
+under `~/.gmem/<kind>/`, in one place in your home directory.
 
-- Project level: `memory`, `note`. They hold this project's context and status.
-- User level: `rules`, `precedents`, `learnings`, `proposals`, `retro`. They hold what
-  the agent learns and what you decide, so it carries across projects.
+- `memory`, `note`, `rules`, `precedents`, `learnings`, `proposals`, `retro`: `${USER}`.
 - `memory_dir`: `.gmem`.
+
+The install modes in the Setup below are presets of all seven locations.
 
 ## Which skill uses which key
 
@@ -87,7 +89,7 @@ Rules:
 - A key missing from that file takes its default, not a value from a lower file.
 - If more than one file exists, **warn** which lower-priority files are being ignored,
   then carry on. Never fail because of this.
-- If none exist, use the defaults and offer to run the setup below.
+- If none exist, use the defaults (Central memory) and offer to run the setup below.
 
 The config file itself is always found at those three fixed paths, whatever
 `memory_dir` says.
@@ -96,18 +98,48 @@ The config file itself is always found at those three fixed paths, whatever
 
 Ask **one question at a time**. Show the choices, wait for the answer, then move on.
 
-1. **Where should the config live?** Offer two options:
+1. **Do you know gmem already?** Yes or no.
+   - **No** — invoke `gmem-ask`, which explains the whole pattern. When it hands back,
+     continue with question 2.
+   - **Yes** — go to question 2.
+2. **Which install mode?** Each mode is a preset of all seven locations:
+
+   | # | Mode | `memory` | `note` | `rules` | `precedents` | `learnings` | `proposals` | `retro` |
+   |---|---|---|---|---|---|---|---|---|
+   | 1 | **Central memory** (default) | `${USER}` | `${USER}` | `${USER}` | `${USER}` | `${USER}` | `${USER}` | `${USER}` |
+   | 2 | **Home Repo Pattern memory** | `${PROJECT}` | `${PROJECT}` | `${PROJECT}` | `${PROJECT}` | `${PROJECT}` | `${PROJECT}` | `${PROJECT}` |
+   | 3 | **Dedicated agents memory** | `${PROJECT}` | `${PROJECT}` | `${USER}` | `${USER}` | `${USER}` | `${USER}` | `${USER}` |
+   | 4 | **Custom** | ask | ask | ask | ask | ask | ask | ask |
+
+   Describe each option when you offer it:
+   1. **Central memory** — recommended for newcomers. Everything in one place in your
+      home directory (`~/.gmem/`).
+   2. **Home Repo Pattern memory** — for people who work across many repos from one
+      home repo on their own machine. All memory and the config live in that project.
+      See [examples/home-repo](https://github.com/thaitype/gmem/tree/main/examples/home-repo) and
+      https://www.aihero.dev/the-home-repo-pattern.
+   3. **Dedicated agents memory** — for setups where each agent or project home keeps
+      its own context and status, while what is learned and decided is shared at user
+      level. See
+      [examples/dedicated-agents](https://github.com/thaitype/gmem/tree/main/examples/dedicated-agents).
+   4. **Custom** — ask about each kind on its own, in this order: `memory`, `note`,
+      `rules`, `precedents`, `learnings`, `proposals`, `retro`. For each, offer Project
+      (`${PROJECT}`), User (`${USER}`), or a custom path the user types in.
+3. **Where should the config file live?** Ask this for every mode. Offer two options and
+   mark the recommended one for the chosen mode:
    - **User level** — set up once, used by every project.
      Writes `~/.gmem/gmem-config.toml`.
    - **Project level** — set up per project, so each project is configured on its own.
      Writes `<project>/.gmem/gmem-config.toml`.
-2. **Which locations?** Offer two options:
-   - **Recommended** — `memory` and `note` in the project; `rules`, `precedents`,
-     `learnings`, `proposals` and `retro` at user level. Write all seven keys with
-     those values.
-   - **Custom** — ask about each kind on its own, in this order: `memory`, `note`,
-     `rules`, `precedents`, `learnings`, `proposals`, `retro`. For each, offer Project
-     (`${PROJECT}`), User (`${USER}`), or a custom path the user types in.
+
+   | Mode | Recommended config location |
+   |---|---|
+   | Central memory | User level |
+   | Home Repo Pattern memory | Project level |
+   | Dedicated agents memory | User level |
+   | Custom | none; do not recommend either |
+
+Always write all seven keys, with the values of the chosen preset.
 
 Do not ask about `memory_dir`; leave it at the default unless the user brings it up.
 
@@ -121,21 +153,21 @@ Before writing:
 After writing, print the resolved folders, for example:
 
 ```
-memory     -> /path/to/project/.gmem/memory
-note       -> /path/to/project/.gmem/note
+memory     -> /Users/you/.gmem/memory
+note       -> /Users/you/.gmem/note
 rules      -> /Users/you/.gmem/rules
 precedents -> /Users/you/.gmem/precedents
 learnings  -> /Users/you/.gmem/learnings
 proposals  -> /Users/you/.gmem/proposals
 retro      -> /Users/you/.gmem/retro
-config     -> /path/to/project/.gmem/gmem-config.toml
+config     -> /Users/you/.gmem/gmem-config.toml
 ```
 
 Create the folders only when something is first saved into them, not during setup.
 
 Then ask one more question:
 
-3. **Add typdoc to help check memory format?** Say first that gmem does not need
+4. **Add typdoc to help check memory format?** Say first that gmem does not need
    typdoc: `gmem-check` already checks format on its own. typdoc is an optional helper
    that checks each file's frontmatter against a schema and reports broken links, and
    `gmem-check` uses it when it is set up.

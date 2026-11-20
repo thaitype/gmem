@@ -23,6 +23,5 @@ Your personality is in [SOUL.md](SOUL.md).
 
 ## Memory (gmem)
 
-This agent uses gmem. Its own memory is in this folder's `.gmem/`. Rules and
-precedents are shared with the other agents and live in `../shared/.gmem/`. At the
-start of a session or before non-trivial work, open `gmem-map` and follow it.
+This project uses gmem. At the start of a session or before non-trivial work, open
+`gmem-map` and follow it.

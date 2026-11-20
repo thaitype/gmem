@@ -10,8 +10,8 @@ Write the diary entry for a chunk of work. A retro is the story of *what happene
 ## Where this lives
 
 Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
-`retro` key. `<retro>` below means `<location.retro>/<memory_dir>/retro/` (default
-`~/.gmem/retro/`). If there is no config, use the defaults and carry on; mention once
+`retro` key. `<retro>` below means `<location.retro>/<memory_dir>/retro/`. Only if no config
+file exists, use the default: `~/.gmem/retro/` (Central memory). Mention once
 that `gmem-setup` can change where these are kept.
 
 ## Retro vs learning — read this first

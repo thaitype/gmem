@@ -1,0 +1,10 @@
+memory_dir = ".gmem"
+
+[location]
+memory     = "${PROJECT}"
+note       = "${PROJECT}"
+rules      = "${USER}"
+precedents = "${USER}"
+learnings  = "${USER}"
+proposals  = "${USER}"
+retro      = "${USER}"

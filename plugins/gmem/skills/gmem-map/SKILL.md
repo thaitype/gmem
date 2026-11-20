@@ -10,12 +10,19 @@ what. What is planted inside each bed is listed in that bed's own `index.md`.
 
 ## Where the garden is
 
-Each kind of memory has its own folder, set by `gmem-setup`. By default, this
-project's context and status live in the project (`<project>/.gmem/memory/`,
-`<project>/.gmem/note/`), and what carries across projects lives at user level
-(`~/.gmem/rules/`, `precedents/`, `learnings/`, `proposals/`, `retro/`). Use memory on
-every task — both to inform your work and to record what you learn. Don't let hard-won
-facts evaporate when a session ends.
+The config decides where each kind lives. Before reading or writing memory, find it.
+Look in this order and use **only the first file found**:
+
+1. `<project>/gmem-config.toml`
+2. `<project>/.gmem/gmem-config.toml`
+3. `~/.gmem/gmem-config.toml`
+
+Each kind's folder is `<location.<kind>>/<memory_dir>/<kind>/`. A key missing from the
+config takes its default.
+
+**Only when no config file exists**, use the defaults (Central memory): every kind under
+`~/.gmem/<kind>/`. Mention once that `gmem-setup` can change this. The full rules are in
+`gmem-setup`. To understand the whole pattern or the install modes, run `gmem-ask`.
 
 ## Two shapes of memory
 
@@ -33,6 +40,9 @@ Highest to lowest: **`rules/` > `precedents/` > `active/` > `learnings/`**. On a
 conflict the higher layer wins. Notes and `retro/` are context, not authority.
 
 ## Use memory (every task)
+
+Use memory on every task — both to inform your work and to record what you learn. Don't
+let hard-won facts evaporate when a session ends.
 
 - **Recall — before starting non-trivial work.** Run `gmem-recall`. It reads, in order:
   `rules/index.md`, `precedents/index.md`, `active/index.md`, and notes that are
@@ -61,7 +71,8 @@ conflict the higher layer wins. Notes and `retro/` are context, not authority.
 | `gmem-judge` | Periodically tidy the learnings: revise rough ones in place, raise proposals in `proposals/` for facts worth promoting to precedents or rules. Non-blocking — learnings stay valid regardless. |
 | `gmem-tidy` | Now and then, audit memory against the rules for each layer and the real code, decide fixes with the user, then apply them. |
 | `gmem-check` | Check, without changing anything, that memory follows gmem's rules and that its format is right. Run it before committing memory. |
-| `gmem-setup` | Choose or inspect where each kind of memory is kept. |
+| `gmem-setup` | Choose an install mode, or inspect where each kind of memory is kept. |
+| `gmem-ask` | Explain gmem: the kinds of memory, the lifecycle, which skill to use when, and the install modes. Read-only. |
 | `gmem-typdoc` | In the `gmem-extensions` plugin: set up typdoc so `gmem-check` checks frontmatter against schemas. Optional. |
 
 Promoting to a precedent or rule is a human step: add the file to `precedents/` or

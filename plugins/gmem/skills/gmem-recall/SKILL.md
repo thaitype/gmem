@@ -21,11 +21,12 @@ Skip it for trivial, throwaway asks where recall adds nothing (e.g. "format this
 Resolve the gmem config first, using the rules in `gmem-setup`. This skill reads every
 kind. Each `<kind>` below means `<location.<kind>>/<memory_dir>/<kind>/`:
 
-- `<memory>` and `<note>` (default `<project>/.gmem/memory/` and `<project>/.gmem/note/`)
-- `<rules>`, `<precedents>`, `<learnings>`, `<proposals>`, `<retro>` (default under
-  `~/.gmem/`)
+- `<memory>`, `<note>`, `<rules>`, `<precedents>`, `<learnings>`, `<proposals>`,
+  `<retro>`
 
-They can live in different places. If there is no config, use the defaults and carry on; mention once that `gmem-setup` can change where they are kept. A folder that doesn't exist just means nothing is recorded there yet.
+They can live in different places; the config says where. Only if no config file
+exists, use the default: every kind under `~/.gmem/<kind>/` (Central memory). Mention
+once that `gmem-setup` can change where they are kept. A folder that doesn't exist just means nothing is recorded there yet.
 
 ## Authority — weigh what you find accordingly
 

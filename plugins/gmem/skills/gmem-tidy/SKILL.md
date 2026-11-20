@@ -9,8 +9,8 @@ description: Audits all of gmem memory against its layout rules — rules, prece
 
 Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses every
 kind. `<memory>`, `<rules>`, `<precedents>`, `<learnings>` and `<proposals>` below each
-mean `<location.<kind>>/<memory_dir>/<kind>/`. By default `<memory>` is
-`<project>/.gmem/memory/` and the other four are under `~/.gmem/`. If there is no config, use the defaults and carry on; mention once
+mean `<location.<kind>>/<memory_dir>/<kind>/`. Only if no config file exists, use
+the default: all five under `~/.gmem/<kind>/` (Central memory). Mention once
 that `gmem-setup` can change where these are kept.
 
 ## 1. Ask scope
@@ -89,7 +89,7 @@ With scope and approach chosen, work through the decisions with the user, carryi
 only after the user confirms the shared understanding. When applying:
 
 0. Make sure every folder you will touch can be recovered. If it is in a git repo, commit any pending changes first;
-   that commit is the pre-tidy point. If it is not in git (the user-level `~/.gmem/...` folders by default), copy it
+   that commit is the pre-tidy point. If it is not in git (user-level `~/.gmem/...` folders, which is where every kind lives when there is no config), copy it
    aside first, e.g. `cp -R <folder> <folder>.pre-tidy-YYYY-MM-DD_HHMM`, and tell the user where the copy is.
 1. `git mv` files you are moving (when source and target are in the same git repo), so history follows them; then edit.
 2. Write one ledger entry `<memory>/YYYY-MM-DD_HHMM_memory-tidy.md`: what moved where, what was removed and why, and

@@ -21,13 +21,13 @@ If you work in a single repository, put gmem in that repository and skip this pa
 ## How gmem fits
 
 One agent, one memory, used across repos. The agent runs from the home repo, so the
-home repo is the project root. `memory` and `note` are set to `${PROJECT}` in
-[`.gmem/gmem-config.toml`](.gmem/gmem-config.toml), which keeps them in the home repo's
-`.gmem/`. Memory about `storefront` and about `payments-api` sit side by side, and a
+home repo is the project root. All seven kinds are set to `${PROJECT}` in
+[`.gmem/gmem-config.toml`](.gmem/gmem-config.toml) (the **Home Repo Pattern memory**
+install mode), which keeps them in the home repo's `.gmem/`. Memory about `storefront` and about `payments-api` sit side by side, and a
 note can track a change that spans both.
 
 The code repositories under `workspace/` are not part of the home repo's history. Your
-team shares memory by pushing the home repo.
+team shares memory, rules and precedents by pushing the home repo.
 
 ## Layout
 
@@ -43,6 +43,7 @@ home-repo/
     gmem-config.toml
     memory/active/          what the agent knows (index.md + topic files)
     note/                   where work stands
+    rules/ precedents/ ...  appear here as they are written
   workspace/                child repos, cloned on demand (ignored)
 ```
 

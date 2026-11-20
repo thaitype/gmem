@@ -16,8 +16,9 @@ Resolve the gmem config first, using the rules in `gmem-setup`. If there is no
 config, offer to run the `gmem-setup` interview before going further — where memory
 should end up is the first decision of a migration. Then:
 
-Each `<kind>` below means `<location.<kind>>/<memory_dir>/<kind>/`. By default `<memory>`
-and `<note>` are in the project, and the other five are under `~/.gmem/`.
+Each `<kind>` below means `<location.<kind>>/<memory_dir>/<kind>/`, as the config
+says. Only if there is still no config file after that offer, use the default: all seven
+under `~/.gmem/<kind>/` (Central memory).
 
 ```
 <memory>/

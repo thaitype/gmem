@@ -14,9 +14,9 @@ explicitly, never triggered automatically.
 ## Where this lives
 
 Resolve the gmem config first, using the rules in `gmem-setup`. This skill uses the
-`location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`;
-with the defaults that is `<project>/.gmem/memory/`. If there is no config, use the
-defaults and carry on; mention once that `gmem-setup` can change where memory is kept.
+`location.memory` key. `<memory>` below means `<location.memory>/<memory_dir>/memory/`.
+Only if no config file exists, use the default: `~/.gmem/memory/` (Central memory).
+Mention once that `gmem-setup` can change where memory is kept.
 
 Entries follow the `gmem-memory` layout for corrections:
 
