@@ -3,7 +3,7 @@
 gmem keeps your coding agent's memory as plain Markdown files you own, so you can read
 every memory, decide what stays, and prune what no longer holds.
 
-> **Status: v1.0.0-alpha.** I have used this memory system for a while, and the results
+> **Status: v1.0.0-alpha.2.** I have used this memory system for a while, and the results
 > are good. Until now its two halves lived apart: memory and notes on one side, and
 > typmem's retros and learnings on the other. This repo brings them together so they
 > are easier to manage. The memory standard itself should not change much. Expect fixes
