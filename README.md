@@ -175,9 +175,11 @@ You now have memory that the agent reads at the start of every session. Learning
 something on its own: from your guidance, from a mistake it made, or from something it
 found out while it worked.
 
-Everything is plain Markdown. With Central memory, all of it is under `~/.gmem/`, so
-none of it is in a project's git history. If you want memory to travel with a repo in git,
-pick **Home Repo Pattern memory** or **Dedicated agents memory** in `gmem-setup`.
+Everything is plain Markdown. With Central memory, all of it is under `~/.gmem/`, outside
+any project's git history. Make `~/.gmem/` a git repo of its own (`gmem-setup` offers to)
+so you can review every change to memory as a diff and undo a bad one. If you want memory
+to travel with a project's repo instead, pick **Home Repo Pattern memory** or **Dedicated
+agents memory** in `gmem-setup`.
 
 ## Examples
 
@@ -252,15 +254,15 @@ is how the agent finds it. A file without a row is easy to miss, so `gmem-recall
 ### Review: the judge sorts, you decide
 
 Run `gmem-judge` after a batch of learnings piles up. It reads every learning with an
-empty `reviewer` field and does one of three things:
+empty `reviewer` field and does one of two things:
 
-- It fixes small problems in place, such as a learning that holds two facts or tells a
-  story.
-- It writes a proposal in `proposals/` when a learning should be promoted,
-  conflicts with a rule or precedent, or is unclear.
+- It writes a proposal in `proposals/` when a learning needs a change: a fix, such as
+  a learning that holds two facts or tells a story, a merge with a duplicate, a
+  promotion, a conflict with a rule or precedent, or a removal.
 - It leaves a clean learning alone.
 
-It then sets `reviewer`, so the next run skips that file. Nothing waits on you here. A
+It never changes a learning's content. The only thing it writes in a learning is
+`reviewer`, so the next run skips that file. Nothing waits on you here. A
 learning stays usable whether or not anyone reads its proposal.
 
 ### Promote: only you change rules and precedents

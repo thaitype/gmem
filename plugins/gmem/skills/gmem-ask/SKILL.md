@@ -31,7 +31,7 @@ Some beds are fenced: `rules/` and `precedents/` change only when a human decide
 | `rules` | What must never be broken. | A human only |
 | `precedents` | Decisions to follow unless there is a stated reason not to. | A human only |
 | `learnings` | One durable fact per file, learned from the work itself. | The agent (`gmem-learn`) |
-| `proposals` | Suggestions to promote, fix or remove a learning. | The agent (`gmem-judge`); a human acts on them |
+| `proposals` | Suggestions to fix, split, merge, promote or remove a learning. | The agent (`gmem-judge`); a human acts on them |
 | `retro` | The diary of a session: what happened, decisions, dead ends, open threads. | The agent (`gmem-retro`) |
 
 **Learning or retro?** Ask: "will this still matter after this work is done?" Yes — it is a
@@ -94,7 +94,7 @@ Every mode is a preset of where the seven kinds live. `${USER}` is your home dir
 
 | Mode | Fits | Trade-off | Config file |
 |---|---|---|---|
-| Central memory | Newcomers, and anyone who wants everything in one place in their home directory | One shared `active/` and note pool for every project, so context from different projects can mix. Nothing is in a project's git history. | User level (recommended) |
+| Central memory | Newcomers, and anyone who wants everything in one place in their home directory | One shared `active/` and note pool for every project, so context from different projects can mix. Nothing is in a project's git history; make `~/.gmem/` a git repo of its own to review changes. | User level (recommended) |
 | Home Repo Pattern memory | One home repo on your own machine that points at many code repos | Everything travels with the repo in git and is easy to share. It only suits work run from that one home. | Project level (recommended) |
 | Dedicated agents memory | Each agent or project home keeps its own context and status, while what is learned and decided is shared at user level | Context stays separate per home, and learnings are shared. Learnings from different homes land in one pool. | User level (recommended) |
 | Custom | You want a split none of the presets give | You choose each kind, so you also own the consequences. | No recommendation |

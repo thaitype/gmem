@@ -93,7 +93,17 @@ After writing, print each resolved folder and the config path, one per line
 (`memory -> /Users/you/.gmem/memory`, …, `config -> /Users/you/.gmem/gmem-config.toml`).
 Create folders only when something is first saved into them.
 
-4. **Add typdoc?** Say gmem doesn't need it: `gmem-check` checks format on its own, and
+4. **Put memory in git?** Ask only if a resolved folder is not inside a git repo; with
+   Central or Dedicated agents memory that is `~/.gmem/` on a fresh install. Recommend
+   yes: every change a gmem skill makes then shows up as a diff the user can review, and
+   a bad change can be undone.
+   - **Yes (recommended)** — `git init` the `<location>/<memory_dir>/` folder (for
+     example `~/.gmem/`), creating it if needed. Skip it if it is already a repo. Leave
+     remotes to the user.
+   - **No** — say once that skills which rewrite files (`gmem-tidy`) will copy a folder
+     aside before changing it instead.
+
+5. **Add typdoc?** Say gmem doesn't need it: `gmem-check` checks format on its own, and
    uses typdoc, when set up, to check frontmatter against schemas and find broken links.
    - **No (default)** — the user can run `gmem-typdoc` later.
    - **Yes** — run `gmem-typdoc` (in the `gmem-extensions` plugin). If it isn't
