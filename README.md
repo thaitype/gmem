@@ -175,9 +175,11 @@ You now have memory that the agent reads at the start of every session. Learning
 something on its own: from your guidance, from a mistake it made, or from something it
 found out while it worked.
 
-Everything is plain Markdown. With Central memory, all of it is under `~/.gmem/`, so
-none of it is in a project's git history. If you want memory to travel with a repo in git,
-pick **Home Repo Pattern memory** or **Dedicated agents memory** in `gmem-setup`.
+Everything is plain Markdown. With Central memory, all of it is under `~/.gmem/`, outside
+any project's git history. Make `~/.gmem/` a git repo of its own (`gmem-setup` offers to)
+so you can review every change to memory as a diff and undo a bad one. If you want memory
+to travel with a project's repo instead, pick **Home Repo Pattern memory** or **Dedicated
+agents memory** in `gmem-setup`.
 
 ## Examples
 

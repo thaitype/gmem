@@ -94,7 +94,7 @@ Every mode is a preset of where the seven kinds live. `${USER}` is your home dir
 
 | Mode | Fits | Trade-off | Config file |
 |---|---|---|---|
-| Central memory | Newcomers, and anyone who wants everything in one place in their home directory | One shared `active/` and note pool for every project, so context from different projects can mix. Nothing is in a project's git history. | User level (recommended) |
+| Central memory | Newcomers, and anyone who wants everything in one place in their home directory | One shared `active/` and note pool for every project, so context from different projects can mix. Nothing is in a project's git history; make `~/.gmem/` a git repo of its own to review changes. | User level (recommended) |
 | Home Repo Pattern memory | One home repo on your own machine that points at many code repos | Everything travels with the repo in git and is easy to share. It only suits work run from that one home. | Project level (recommended) |
 | Dedicated agents memory | Each agent or project home keeps its own context and status, while what is learned and decided is shared at user level | Context stays separate per home, and learnings are shared. Learnings from different homes land in one pool. | User level (recommended) |
 | Custom | You want a split none of the presets give | You choose each kind, so you also own the consequences. | No recommendation |
