@@ -252,15 +252,15 @@ is how the agent finds it. A file without a row is easy to miss, so `gmem-recall
 ### Review: the judge sorts, you decide
 
 Run `gmem-judge` after a batch of learnings piles up. It reads every learning with an
-empty `reviewer` field and does one of three things:
+empty `reviewer` field and does one of two things:
 
-- It fixes small problems in place, such as a learning that holds two facts or tells a
-  story.
-- It writes a proposal in `proposals/` when a learning should be promoted,
-  conflicts with a rule or precedent, or is unclear.
+- It writes a proposal in `proposals/` when a learning needs a change: a fix, such as
+  a learning that holds two facts or tells a story, a merge with a duplicate, a
+  promotion, a conflict with a rule or precedent, or a removal.
 - It leaves a clean learning alone.
 
-It then sets `reviewer`, so the next run skips that file. Nothing waits on you here. A
+It never changes a learning's content. The only thing it writes in a learning is
+`reviewer`, so the next run skips that file. Nothing waits on you here. A
 learning stays usable whether or not anyone reads its proposal.
 
 ### Promote: only you change rules and precedents

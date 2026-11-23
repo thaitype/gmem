@@ -31,7 +31,7 @@ Some beds are fenced: `rules/` and `precedents/` change only when a human decide
 | `rules` | What must never be broken. | A human only |
 | `precedents` | Decisions to follow unless there is a stated reason not to. | A human only |
 | `learnings` | One durable fact per file, learned from the work itself. | The agent (`gmem-learn`) |
-| `proposals` | Suggestions to promote, fix or remove a learning. | The agent (`gmem-judge`); a human acts on them |
+| `proposals` | Suggestions to fix, split, merge, promote or remove a learning. | The agent (`gmem-judge`); a human acts on them |
 | `retro` | The diary of a session: what happened, decisions, dead ends, open threads. | The agent (`gmem-retro`) |
 
 **Learning or retro?** Ask: "will this still matter after this work is done?" Yes — it is a

@@ -41,8 +41,8 @@ to read it).
   decision has superseded it), and is not a near-duplicate of another precedent on the same topic. Flag any that fail
   one of these; never rewrite its content.
 
-**`learnings/`**: resolve via `gmem-judge`. Revise cheap fixes in place, or raise a proposal when a learning conflicts
-with `rules/`/`precedents/`, generalizes badly, or is unclear.
+**`learnings/`**: resolve via `gmem-judge`. It raises a proposal for each learning that needs a change (revise, split,
+merge, promote, conflict, remove) and never changes a learning's content itself.
 
 **`proposals/`**: live when the situation it names still exists and no rule/precedent has since answered it. Flag as
 stale when the learning behind it was later revised or removed, the question was already settled elsewhere, or enough

@@ -68,7 +68,7 @@ let hard-won facts evaporate when a session ends.
 
 | Skill | Use it for |
 |---|---|
-| `gmem-judge` | Periodically tidy the learnings: revise rough ones in place, raise proposals in `proposals/` for facts worth promoting to precedents or rules. Non-blocking — learnings stay valid regardless. |
+| `gmem-judge` | Periodically review the learnings: raise proposals in `proposals/` for rough ones (revise, split, merge, remove) and for facts worth promoting to precedents or rules. Never changes a learning's content. Non-blocking — learnings stay valid regardless. |
 | `gmem-tidy` | Now and then, audit memory against the rules for each layer and the real code, decide fixes with the user, then apply them. |
 | `gmem-check` | Check, without changing anything, that memory follows gmem's rules and that its format is right. Run it before committing memory. |
 | `gmem-setup` | Choose an install mode, or inspect where each kind of memory is kept. |
